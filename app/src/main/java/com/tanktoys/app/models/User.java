@@ -1,17 +1,21 @@
 package com.tanktoys.app.models;
 
-public class User {
+import com.tanktoys.app.services.interfaces.IDatabaseItem;
 
-    // property definition
+import jakarta.validation.constraints.NotNull;
+
+public class User implements IDatabaseItem{
+
+    @NotNull(message = "address cannot be null")
     private String _address;
+    
+    @NotNull(message = "username cannot be null")
     private String _user;
 
-    // constructors
     public User(){
         
     }
 
-    // Setters & Getters
     public User(String address, String user){
         _address = address;
         _user = user;
@@ -32,9 +36,13 @@ public class User {
         _address = address;
     }
 
-    // Class specific methods
     public String toString(){
         return "address: "+_address+" , user: "+_user;
+    }
+
+    @Override
+    public String ToINSERT() {
+        return "INSERT ";
     }
 
 

@@ -11,7 +11,7 @@ import com.tanktoys.app.services.Database;
 
 @RestController
 @EnableAutoConfiguration
-@RequestMapping("/api/v1/test")
+@RequestMapping("${api-version-path}/test")
 public class testController {
 
     @Autowired
