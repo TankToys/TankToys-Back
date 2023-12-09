@@ -1,13 +1,14 @@
 package com.tanktoys.app.models;
 
-import com.tanktoys.app.services.interfaces.IDatabaseItem;
+import com.tanktoys.app.interfaces.IDatabaseItem;
+import com.tanktoys.app.utils.customExceptions.AddressNotValidException;
 
 import jakarta.validation.constraints.NotNull;
 
 public class User implements IDatabaseItem{
 
     @NotNull(message = "address cannot be null")
-    private String _address;
+    private Address _address;
     
     @NotNull(message = "username cannot be null")
     private String _user;
@@ -16,8 +17,8 @@ public class User implements IDatabaseItem{
         
     }
 
-    public User(String address, String user){
-        _address = address;
+    public User(String address, String user) throws AddressNotValidException{
+        _address = new Address(address);
         _user = user;
     }
 
@@ -28,16 +29,13 @@ public class User implements IDatabaseItem{
     public void Setuser(String user){
         _user = user;
     }
-    public String Getaddress(){
+    public Address Getaddress(){
         return _address;
     }
-    
-    public void Setaddress(String address){
-        _address = address;
-    }
+
 
     public String toString(){
-        return "address: "+_address+" , user: "+_user;
+        return "address: "+_address.Getaddress()+" , user: "+_user;
     }
 
     @Override
@@ -47,4 +45,5 @@ public class User implements IDatabaseItem{
 
 
 
+    
 }

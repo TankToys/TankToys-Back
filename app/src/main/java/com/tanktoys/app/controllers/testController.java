@@ -11,7 +11,7 @@ import com.tanktoys.app.services.Database;
 
 @RestController
 @EnableAutoConfiguration
-@RequestMapping("${api-version-path}/test")
+@RequestMapping("${testPath}")
 public class testController {
 
     @Autowired
@@ -21,8 +21,11 @@ public class testController {
     public String testMethod() throws Exception {
         String userList = "";
         for (User user : db.run()) {
-            userList += "; "+user.toString();
+            if (user != null) {
+                userList += "; "+user.toString();
+            }
         }
+
         return userList;
     }
 

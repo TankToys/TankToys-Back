@@ -10,6 +10,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
 
 import com.tanktoys.app.models.User;
+import com.tanktoys.app.utils.customExceptions.AddressNotValidException;
 
 @Service
 public class Database {
@@ -23,8 +24,14 @@ public class Database {
         return jdbcTemplate.query(sql, new RowMapper<User>() {
             @Override
             public User mapRow(ResultSet rs, int rowNum) throws SQLException {
-                User user = new User(rs.getString(1), rs.getString(2));
-                return user;
+                User user;
+                try {
+                    user = new User(rs.getString(1), rs.getString(2));
+                    return user;
+                } catch (AddressNotValidException e) {
+                    e.printStackTrace();
+                }
+                return null;
             }
             
         });
