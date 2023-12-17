@@ -9,26 +9,27 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @EnableAutoConfiguration
-@RequestMapping("${roomPath}")
-public class roomController {
+@RequestMapping("${rankingPath}")
+public class rankingController {
+
 
     @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> getRoom(){
+    public ResponseEntity<String> getRanking(){
         return null;
     }
 
     @RequestMapping(method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity insertRoom(){
+    public ResponseEntity insertRanking(){
         return null;
     }
 
     @RequestMapping(method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity editRoom(){
+    public ResponseEntity editRanking(){
         return null;
     }
 
     @RequestMapping(method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity deleteRoom(){
+    public ResponseEntity deleteRanking(){
         return null;
     }
 }

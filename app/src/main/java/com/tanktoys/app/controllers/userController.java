@@ -1,13 +1,19 @@
 package com.tanktoys.app.controllers;
 
+import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.tanktoys.app.models.User;
+import com.tanktoys.app.services.UserService;
+import com.tanktoys.app.utils.customExceptions.AddressNotValidException;
 
 @RestController
 @EnableAutoConfiguration
@@ -15,11 +21,24 @@ import com.tanktoys.app.models.User;
 public class userController {
 
     @Autowired
-    User user;
+    UserService user;
 
-    @RequestMapping(value = "/{username}", method = RequestMethod.GET)
-    public String test(@PathVariable("username") String username){
+    @RequestMapping(value = "/{address}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> getUserByAddress(@PathVariable("address") String address) throws AddressNotValidException{
+        return new ResponseEntity<String>(user.getUserByAddress(address).toString(), HttpStatus.OK);
+    }
+
+    @RequestMapping(method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity insertUser(@RequestBody String requestUser) throws JSONException, AddressNotValidException{
+        if (user.insertUser(user.JSONToUser(requestUser))) {
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
+    @RequestMapping(method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity editUser(@RequestBody String requestUser){
         
-        return "functiona" + username;
+        return null;
     }
 }

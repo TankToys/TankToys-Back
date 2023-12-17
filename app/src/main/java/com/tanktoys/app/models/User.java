@@ -2,9 +2,15 @@ package com.tanktoys.app.models;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
+import org.json.JSONObject;
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tanktoys.app.interfaces.IDatabaseItem;
 import com.tanktoys.app.utils.customExceptions.AddressNotValidException;
 
@@ -41,12 +47,17 @@ public class User implements IDatabaseItem{
 
     @Override
     public String toString(){
-        return "address: "+_address.Getaddress()+" , user: "+_user;
+        JSONObject jsonObject = new JSONObject();
+        Map<String, String> userMap = new HashMap<String, String>();
+        userMap.put("address", _address.Getaddress());
+        userMap.put("user", _user);
+        jsonObject.put("user", userMap);
+        return jsonObject.toString();
     }
 
     @Override
     public String ToINSERT() {
-        return "INSERT INTO addresses(address,\"user\") VALUES('"+_address.toString()+"','"+_user+"')";
+        return "INSERT INTO addresses(address, username, level) VALUES('"+_address.toString()+"','"+_user+"', 0)";
     }
 
     @Override
