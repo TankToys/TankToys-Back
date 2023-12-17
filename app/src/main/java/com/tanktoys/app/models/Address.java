@@ -18,6 +18,11 @@ public class Address {
         }
     }
 
+    @Override
+    public String toString(){
+        return _address;
+    }
+
     public void Setaddress(String address) throws AddressNotValidException {
         if (AddressValidator.validate(address)) {
             _address = address;
