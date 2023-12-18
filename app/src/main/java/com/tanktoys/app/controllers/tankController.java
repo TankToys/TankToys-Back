@@ -28,6 +28,8 @@ public class tankController {
     @Autowired
     TankService tank;
 
+    //--------------------------------------------------GET TANK BY ID--------------------------------------------------------
+
     @Operation(summary = "${tankPath}/{id}")
     @ApiResponses(value = { @ApiResponse(responseCode = "200",  content = {
             @Content(mediaType = "application/json", schema = @Schema(implementation = Tank.class))
@@ -37,6 +39,8 @@ public class tankController {
     public ResponseEntity<Tank> getTankById(@PathVariable("id") int id) throws AddressNotValidException{
         return new ResponseEntity<Tank>(tank.getTankById(id), HttpStatus.OK);
     }
+
+    //--------------------------------------------------GET TANKS BY CREATOR ADDRESS--------------------------------------------------------
 
     @Operation(summary = "${tankPath}/creator/{address}")
     @ApiResponses(value = { @ApiResponse(responseCode = "200",  content = {
@@ -48,6 +52,8 @@ public class tankController {
         return new ResponseEntity<Tank[]>(tank.getTanksByCreatorAddress(address), HttpStatus.OK);
     }
 
+    //--------------------------------------------------GET TANKS BY BULLET--------------------------------------------------------
+
     @Operation(summary = "${tankPath}/bullet/{name}")
     @ApiResponses(value = { @ApiResponse(responseCode = "200",  content = {
             @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = Tank.class)))
@@ -57,6 +63,8 @@ public class tankController {
     public ResponseEntity<Tank[]> getTanksByBullet(@PathVariable("bulletId") int bulletId){
         return new ResponseEntity<Tank[]>(tank.getTanksByBullet(bulletId) , HttpStatus.OK);
     }
+
+    //--------------------------------------------------GET TANKS BY CANNON--------------------------------------------------------
 
     @Operation(summary = "${tankPath}/cannon/{name}")
     @ApiResponses(value = { @ApiResponse(responseCode = "200",  content = {
@@ -68,6 +76,8 @@ public class tankController {
         return new ResponseEntity<Tank[]>(tank.getTanksByCannon(cannonId), HttpStatus.OK);
     }
 
+    //--------------------------------------------------GET TANKS BY SHELL--------------------------------------------------------
+
     @Operation(summary = "${tankPath}/shell/{name}")
     @ApiResponses(value = { @ApiResponse(responseCode = "200",  content = {
             @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = Tank.class)))
@@ -77,6 +87,8 @@ public class tankController {
     public ResponseEntity<Tank[]> getTanksByShell(@PathVariable("shellId") int shellId){
         return new ResponseEntity<Tank[]>(tank.getTanksByShell(shellId), HttpStatus.OK);
     }
+
+    //--------------------------------------------------GET TANKS BY TRACKWHEEL--------------------------------------------------------
 
     @Operation(summary = "${tankPath}/trackWheel/{name}")
     @ApiResponses(value = { @ApiResponse(responseCode = "200",  content = {
@@ -88,6 +100,8 @@ public class tankController {
         return new ResponseEntity<Tank[]>(tank.getTanksByTrackWheel(trackWheelId), HttpStatus.OK);
     }
 
+    //--------------------------------------------------INSET TANK--------------------------------------------------------
+
     @Operation(summary = "${tankPath}")
     @ApiResponses(value = { @ApiResponse(responseCode = "200",  content = {
             @Content(mediaType = "application/json", schema = @Schema(implementation = String.class))
@@ -98,6 +112,8 @@ public class tankController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
+    //--------------------------------------------------EDIT TANK--------------------------------------------------------
+
     @Operation(summary = "${tankPath}")
     @ApiResponses(value = { @ApiResponse(responseCode = "200",  content = {
             @Content(mediaType = "application/json", schema = @Schema(implementation = String.class))
@@ -107,6 +123,8 @@ public class tankController {
     public ResponseEntity editTank(){
         return new ResponseEntity(HttpStatus.OK);
     }
+
+    //--------------------------------------------------DELETE TANK--------------------------------------------------------
 
     @Operation(summary = "${tankPath}")
     @ApiResponses(value = { @ApiResponse(responseCode = "200",  content = {

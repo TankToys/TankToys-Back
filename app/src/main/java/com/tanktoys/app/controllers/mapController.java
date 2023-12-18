@@ -26,6 +26,8 @@ public class mapController {
     @Autowired
     MapService map;
 
+    //--------------------------------------------------GET MAP BY ID--------------------------------------------------------
+
     @Operation(summary = "${mapPath}/{id}")
     @ApiResponses(value = { @ApiResponse(responseCode = "200",  content = {
             @Content(mediaType = "application/json", schema = @Schema(implementation = String.class))
@@ -35,6 +37,8 @@ public class mapController {
     public ResponseEntity<String> getMapById(@PathVariable("id") int id) throws AddressNotValidException{
         return new ResponseEntity<String>(map.getMapById(id).toString(), HttpStatus.OK);
     }
+
+    //--------------------------------------------------GET MAPS BY CREATOR ADDRESS--------------------------------------------------------
 
     @Operation(summary = "${mapPath}/creator/{address}")
     @ApiResponses(value = { @ApiResponse(responseCode = "200",  content = {
@@ -46,6 +50,8 @@ public class mapController {
         return new ResponseEntity<String>(map.getMapsByCreatorAddress(address).toString(), HttpStatus.OK);
     }
 
+    //--------------------------------------------------INSERT MAP--------------------------------------------------------
+
     @Operation(summary = "${mapPath}")
     @ApiResponses(value = { @ApiResponse(responseCode = "200",  content = {
             @Content(mediaType = "application/json", schema = @Schema(implementation = String.class))
@@ -56,6 +62,8 @@ public class mapController {
         return null;
     }
 
+    //--------------------------------------------------EDIT MAP--------------------------------------------------------
+
     @Operation(summary = "${mapPath}")
     @ApiResponses(value = { @ApiResponse(responseCode = "200",  content = {
             @Content(mediaType = "application/json", schema = @Schema(implementation = String.class))
@@ -65,6 +73,8 @@ public class mapController {
     public ResponseEntity editMap(){
         return null;
     }
+
+    //--------------------------------------------------DELETE MAP--------------------------------------------------------
 
     @Operation(summary = "${mapPath}")
     @ApiResponses(value = { @ApiResponse(responseCode = "200",  content = {

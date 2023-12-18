@@ -17,6 +17,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @RequestMapping("${rankingPath}")
 public class rankingController {
 
+    //--------------------------------------------------GET TANKING--------------------------------------------------------
+    
     @Operation(summary = "${rankingPath}")
     @ApiResponses(value = { @ApiResponse(responseCode = "200",  content = {
             @Content(mediaType = "application/json", schema = @Schema(implementation = String.class))
@@ -26,6 +28,8 @@ public class rankingController {
     public ResponseEntity<String> getRanking() {
         return null;
     }
+
+    //--------------------------------------------------GET RANKS BY ADDRESS--------------------------------------------------------
 
     @Operation(summary = "${rankingPath}/{address}")
     @ApiResponses(value = { @ApiResponse(responseCode = "200",  content = {
@@ -37,6 +41,8 @@ public class rankingController {
         return null;
     }
 
+    //--------------------------------------------------GET RANKS BY MODE--------------------------------------------------------
+
     @Operation(summary = "${rankingPath}/{mode}")
     @ApiResponses(value = { @ApiResponse(responseCode = "200",  content = {
             @Content(mediaType = "application/json", schema = @Schema(implementation = String.class))
@@ -46,6 +52,8 @@ public class rankingController {
     public ResponseEntity getRanksByMode() {
         return null;
     }
+
+    //--------------------------------------------------INSERT RANKING--------------------------------------------------------
 
     @Operation(summary = "${rankingPath}")
     @ApiResponses(value = { @ApiResponse(responseCode = "200",  content = {
@@ -57,6 +65,8 @@ public class rankingController {
         return null;
     }
 
+    //--------------------------------------------------EDIT RANKING--------------------------------------------------------
+
     @Operation(summary = "${rankingPath}")
     @ApiResponses(value = { @ApiResponse(responseCode = "200",  content = {
             @Content(mediaType = "application/json", schema = @Schema(implementation = String.class))
@@ -66,6 +76,8 @@ public class rankingController {
     public ResponseEntity editRanking() {
         return null;
     }
+
+    //--------------------------------------------------DELETE RANKING--------------------------------------------------------
 
     @Operation(summary = "${rankingPath}")
     @ApiResponses(value = { @ApiResponse(responseCode = "200",  content = {

@@ -27,6 +27,8 @@ public class roomController {
 	@Autowired
 	RoomService roomService;
 
+	//--------------------------------------------------GET ROOM BY ID--------------------------------------------------------
+
 	@Operation(summary = "${roomPath}/{id}")
 	@ApiResponses(value = { @ApiResponse(responseCode = "200", content = {
 			@Content(mediaType = "application/json", schema = @Schema(implementation = Room.class))
@@ -36,6 +38,8 @@ public class roomController {
 	public ResponseEntity<Room> getRoom(@PathVariable("id") int id) {
 		return new ResponseEntity<Room>(roomService.getRoomById(id), HttpStatus.OK);
 	}
+
+	//--------------------------------------------------INSERT ROOM--------------------------------------------------------
 
 	@Operation(summary = "${roomPath}")
 	@ApiResponses(value = { @ApiResponse(responseCode = "200", content = {
@@ -50,6 +54,8 @@ public class roomController {
 		return new ResponseEntity(HttpStatus.BAD_REQUEST);
 	}
 
+	//--------------------------------------------------EDIT ROOM--------------------------------------------------------
+
 	@Operation(summary = "${roomPath}")
 	@ApiResponses(value = { @ApiResponse(responseCode = "200", content = {
 			@Content(mediaType = "application/json")
@@ -62,6 +68,8 @@ public class roomController {
 		}
 		return new ResponseEntity(HttpStatus.BAD_REQUEST);
 	}
+
+	//--------------------------------------------------DELETE ROOM--------------------------------------------------------
 
 	@Operation(summary = "${roomPath}")
 	@ApiResponses(value = { @ApiResponse(responseCode = "200", content = {

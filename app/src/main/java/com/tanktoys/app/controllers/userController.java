@@ -28,6 +28,8 @@ public class userController {
     @Autowired
     UserService user;
 
+    //--------------------------------------------------GET USER BY ADDRESS--------------------------------------------------------
+
     @Operation(summary = "${userPath}/{address}")
     @ApiResponses(value = { @ApiResponse(responseCode = "200", content = {
             @Content(mediaType = "application/json", schema = @Schema(implementation = User.class))
@@ -38,6 +40,8 @@ public class userController {
             throws AddressNotValidException {
         return new ResponseEntity<String>(user.getUserByAddress(address).toJSON(), HttpStatus.OK);
     }
+
+    //--------------------------------------------------INSERT USER--------------------------------------------------------
 
     @Operation(summary = "${userPath}")
     @ApiResponses(value = { @ApiResponse(responseCode = "200", content = {
@@ -52,6 +56,8 @@ public class userController {
         return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 
+    //--------------------------------------------------EDIT USER--------------------------------------------------------
+
     @Operation(summary = "${userPath}")
     @ApiResponses(value = { @ApiResponse(responseCode = "200", content = {
             @Content(mediaType = "application/json")
@@ -64,6 +70,8 @@ public class userController {
         }
         return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
+
+    //--------------------------------------------------DELETE USER--------------------------------------------------------
 
     @Operation(summary = "${userPath}")
     @ApiResponses(value = { @ApiResponse(responseCode = "200", content = {
