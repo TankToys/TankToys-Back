@@ -34,6 +34,24 @@ public class DatabaseService {
         return result;
     }
 
+    public <T> List<IDatabaseItem> SelectByKey(IDatabaseItem item, String keyName, T key) {
+        String sql = item.ToSELECTKeyName(keyName, key);
+
+        List<IDatabaseItem> result = jdbcTemplate.query(sql, new RowMapper<IDatabaseItem>() {
+            @Override
+            public IDatabaseItem mapRow(ResultSet rs, int rowNum) throws SQLException {
+                try {
+                    return item.load(rs, rowNum);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                return null;
+            }
+        });
+
+        return result;
+    }
+
     public boolean Insert(IDatabaseItem item) {
         String sql = item.ToINSERT();
         try {

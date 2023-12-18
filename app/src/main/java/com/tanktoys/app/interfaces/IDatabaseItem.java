@@ -7,6 +7,7 @@ public interface IDatabaseItem{
     // sql generation methods
     public String ToINSERT();
     public <T> String ToSELECT(T key);
+    public <T> String ToSELECTKeyName(String keyName, T key);
     public <T> String ToUPDATE(T key);
     public <T> String ToDELETE(T key);
 

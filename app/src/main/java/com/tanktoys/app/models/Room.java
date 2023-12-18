@@ -69,7 +69,12 @@ public class Room implements IDatabaseItem, ISerializable {
 
     @Override
     public <T> String ToSELECT(T key) {
-        return "SELECT * FROM rooms";
+        return "SELECT * FROM rooms WHERE id = '"+key+"'";
+    }
+
+    @Override
+    public <T> String ToSELECTKeyName(String keyName, T key) {
+        return "SELECT * FROM rooms WHERE "+keyName+" LIKE '"+key+"'";
     }
 
     @Override

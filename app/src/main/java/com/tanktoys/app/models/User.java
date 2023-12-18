@@ -69,6 +69,11 @@ public class User implements IDatabaseItem, ISerializable{
     }
 
     @Override
+    public <T> String ToSELECTKeyName(String keyName, T key) {
+        return "SELECT * FROM addresses WHERE "+keyName+" LIKE '"+key+"'";
+    }  
+
+    @Override
     public <T> String ToUPDATE(T key) {
         return "UPDATE addresses SET address='"+_address.toString()+"', username='"+_user+"', level='"+_level+"' WHERE address LIKE '"+key+"'";
     }
@@ -103,5 +108,5 @@ public class User implements IDatabaseItem, ISerializable{
         _user = object.getString("user");
         _level = object.getInt("level");
         return this;
-    }    
+    }  
 }
