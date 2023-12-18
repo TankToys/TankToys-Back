@@ -80,7 +80,7 @@ public class User implements IDatabaseItem, ISerializable{
 
     @Override
     public User load(ResultSet rs, int rowNum) throws AddressNotValidException, SQLException {
-        _address.Setaddress(rs.getString(1));
+        _address.SetAddress(rs.getString(1));
         _user = rs.getString(2);   
         return this;
     }
@@ -89,7 +89,7 @@ public class User implements IDatabaseItem, ISerializable{
     public String toJSON() {
         JSONObject jsonObject = new JSONObject();
         Map<String, Object> userMap = new HashMap<String, Object>();
-        userMap.put("address", _address.Getaddress());
+        userMap.put("address", _address.GetAddress());
         userMap.put("user", _user);
         userMap.put("level", _level);
         jsonObject.put("user", userMap);
@@ -99,7 +99,7 @@ public class User implements IDatabaseItem, ISerializable{
     @Override
     public User fromJSON(String JSON) throws JSONException, AddressNotValidException{
         JSONObject object = new JSONObject(JSON);
-        _address.Setaddress(object.getString("address"));
+        _address.SetAddress(object.getString("address"));
         _user = object.getString("user");
         _level = object.getInt("level");
         return this;
