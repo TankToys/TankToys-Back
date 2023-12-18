@@ -7,10 +7,10 @@ public class ArrayMap {
     private int[][] _positions;
 
     public ArrayMap(int[][] positions) throws PositionNotValidException {
-        Setpositions(positions);
+        SetPositions(positions);
     }
 
-    public int[][] Getpositions() {
+    public int[][] GetPositions() {
         if (_positions != null) {
             return _positions;
         } else {
@@ -18,7 +18,7 @@ public class ArrayMap {
         }
     }
 
-    public void Setpositions(int[][] positions) throws PositionNotValidException {
+    public void SetPositions(int[][] positions) throws PositionNotValidException {
         if (PositionValidator.validate(positions)) {
             _positions = positions;
         } else {

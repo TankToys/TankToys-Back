@@ -7,10 +7,10 @@ public class Address {
     private String _address;
 
     public Address(String address) throws AddressNotValidException {
-        Setaddress(address);
+        SetAddress(address);
     }
 
-    public String Getaddress() {
+    public String GetAddress() {
         if (_address != null) {
             return _address;
         } else {
@@ -23,7 +23,7 @@ public class Address {
         return _address;
     }
 
-    public void Setaddress(String address) throws AddressNotValidException {
+    public void SetAddress(String address) throws AddressNotValidException {
         if (AddressValidator.validate(address)) {
             _address = address;
         } else {
