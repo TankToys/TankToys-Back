@@ -48,20 +48,22 @@ public class Ranking implements IDatabaseItem {
     
     @Override
     public String ToINSERT() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'ToINSERT'");
+        return "INSERT INTO ranking(address, modes) VALUES('"+_address+"','"+_modes.toString()+"')";
     }
 
     @Override
     public <T> String ToSELECT(T key) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'ToSELECT'");
+        return "SELECT * FROM ranking WHERE address LIKE '"+key+"';";
     }
 
     @Override
     public <T> String ToDELETE(T key) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'ToDELETE'");
+        return "DELETE FROM ranking WHERE address LIKE '"+key+"';";
+    }
+    
+    @Override
+    public <T> String ToUPDATE(T key) {
+        return "UPDATE ranking SET address='"+_address+"', modes='"+_modes+"' WHERE address LIKE '"+key+"';";
     }
 
     @Override
@@ -70,9 +72,4 @@ public class Ranking implements IDatabaseItem {
         throw new UnsupportedOperationException("Unimplemented method 'load'");
     }
 
-    @Override
-    public <T> String ToUPDATE(T key) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'ToUPDATE'");
-    }
 }

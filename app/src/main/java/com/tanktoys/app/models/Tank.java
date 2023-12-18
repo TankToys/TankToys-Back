@@ -1,11 +1,17 @@
 package com.tanktoys.app.models;
 
+import java.sql.ResultSet;
+
+import com.tanktoys.app.interfaces.IDatabaseItem;
+import com.tanktoys.app.interfaces.ISerializable;
 import com.tanktoys.app.utils.customExceptions.AddressNotValidException;
-import com.tanktoys.app.utils.customExceptions.PositionNotValidException;
 
 import jakarta.validation.constraints.NotNull;
 
-public class Tank {
+public class Tank implements IDatabaseItem, ISerializable{
+
+    @NotNull(message = "Id cannot be null")
+    private int _id;
 
     @NotNull(message = "Bullet cannot be null")
     public Bullet _bullet;
@@ -25,13 +31,18 @@ public class Tank {
     @NotNull(message = "Creator cannot be null")
     public Address _creator;
     
-    public Tank(Bullet bullet, Cannon cannon, Shell shell, TrackWheels trackWheels, String name, String creator) throws  AddressNotValidException {
+    public Tank(int id, Bullet bullet, Cannon cannon, Shell shell, TrackWheels trackWheels, String name, String creator) throws  AddressNotValidException {
+        _id = id;
         _bullet = bullet;
         _cannon = cannon;
         _shell = shell;
         _trackWheels = trackWheels;
         _name = name;
         _creator = new Address(creator);
+    }
+
+    public int GetId() {
+        return _id;
     }
 
     public Bullet GetBullet(){
@@ -76,5 +87,45 @@ public class Tank {
 
     public void Setname(String name) {
         _name = name;
+    }
+
+    @Override
+    public String toJSON() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'toJSON'");
+    }
+
+    @Override
+    public ISerializable fromJSON(String JSON) throws Exception {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'fromJSON'");
+    }
+
+    @Override
+    public String ToINSERT() {
+        return "INSERT INTO tank(id, bullet, cannon, shell, trackwheel, name, creator) VALUES ('"+_id+"', '"+_bullet.GetId()+"', '"
+        +_cannon.GetId()+"', '"+_shell.GetId()+"', '"+_trackWheels.GetId()+"', '"+_name+"', '"+_creator+"');";
+    }
+
+    @Override
+    public <T> String ToSELECT(T key) {
+        return "SELECT * FROM tank WHERE id LIKE '"+key+"';";
+    }
+
+    @Override
+    public <T> String ToUPDATE(T key) {
+        return "UPDATE tank SET id='"+_id+"', bullet='"+_bullet.GetId()+"', cannon='"
+        +_cannon.GetId()+"', shell='"+_shell.GetId()+"', trackwheel='"+_trackWheels.GetId()+"', name='"+_name+"', creator='"+_creator+"' WHERE id LIKE '"+key+"';";
+    }
+
+    @Override
+    public <T> String ToDELETE(T key) {
+        return "DELETE FROM tank WHERE id LIKE '"+key+"';";
+    }
+
+    @Override
+    public IDatabaseItem load(ResultSet rs, int rowNum) throws Exception {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'load'");
     }
 }

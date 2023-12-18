@@ -1,18 +1,24 @@
 package com.tanktoys.app.models;
 
 public class Shell {
+    private int _id;
     private int _hp;
     private String _type;
     private String _name;
 
-    public Shell(int hp, String type, String name) {
-        SetShell(hp, type, name);
+    public Shell(int id, int hp, String type, String name) {
+        SetShell(id, hp, type, name);
     }
 
-    public void SetShell(int hp, String type, String name) {
+    public void SetShell(int id, int hp, String type, String name) {
+        _id = id;
         _hp = hp;
         _type = type;
         _name = name;
+    }
+
+    public int GetId() {
+        return _id;
     }
 
     public int GetHp() {
