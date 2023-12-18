@@ -7,6 +7,8 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.tanktoys.app.models.Address;
+import com.tanktoys.app.models.Map;
 import com.tanktoys.app.models.User;
 import com.tanktoys.app.utils.customExceptions.AddressNotValidException;
 
@@ -22,8 +24,7 @@ public class UserService {
     }
     
     public User JSONToUser(String userString) throws JSONException, AddressNotValidException{
-        JSONObject object = new JSONObject(userString);
-        return new User(object.getString("address"), object.getString("user"));
+        return new User().fromJSON(userString);
     }
 
     public User getUserByAddress(String address) throws AddressNotValidException{
@@ -34,5 +35,14 @@ public class UserService {
 
     public boolean insertUser(User user){
         return db.Insert(user);
+    }
+
+    public boolean editUser(User user) {
+        return db.Update(user, user.Getaddress().toString());
+    }
+
+    public boolean deleteUser(Address address) throws AddressNotValidException {
+        User user = new User();
+        return db.Delete(user, address.toString());
     }
 }
