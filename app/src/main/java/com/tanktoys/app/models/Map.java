@@ -31,23 +31,23 @@ public class Map {
         _name = name;
     }
 
-    public ArrayMap GetarrMap(){
+    public ArrayMap GetArrMap(){
         return _arrMap;
     }
 
-    public void SetarrMap(int[][] positions) throws PositionNotValidException{
+    public void SetArrMap(int[][] positions) throws PositionNotValidException{
         _arrMap = new ArrayMap(positions);
     }
 
-    public Address Getscreator(){
+    public Address GetCreator(){
         return _creator;
     }
 
-    public String Getname() {
+    public String GetName() {
         return _name;
     }
 
-    public void Setname(String name) {
+    public void SetName(String name) {
         _name = name;
     }
 
