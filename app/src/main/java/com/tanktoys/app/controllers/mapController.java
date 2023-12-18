@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tanktoys.app.services.UserService;
-import com.tanktoys.app.services.mapService;
+import com.tanktoys.app.services.MapService;
 import com.tanktoys.app.utils.customExceptions.AddressNotValidException;
 
 @RestController
@@ -20,7 +20,7 @@ import com.tanktoys.app.utils.customExceptions.AddressNotValidException;
 public class mapController {
 
     @Autowired
-    mapService map;
+    MapService map;
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> getMapById(@PathVariable("id") int id) throws AddressNotValidException{

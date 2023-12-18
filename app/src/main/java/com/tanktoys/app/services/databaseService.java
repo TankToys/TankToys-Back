@@ -3,16 +3,12 @@ package com.tanktoys.app.services;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
 
 import com.tanktoys.app.interfaces.IDatabaseItem;
-import com.tanktoys.app.models.User;
-import com.tanktoys.app.utils.customExceptions.AddressNotValidException;
 
 @Service
 public class DatabaseService {
@@ -40,6 +36,28 @@ public class DatabaseService {
 
     public boolean Insert(IDatabaseItem item) {
         String sql = item.ToINSERT();
+        try {
+            jdbcTemplate.execute(sql);
+        } catch (Exception e) {
+            System.out.println(e);
+            return false;
+        }
+        return true;
+    }
+
+    public <T> boolean Update(IDatabaseItem item, T key){
+        String sql = item.ToUPDATE(key);
+        try {
+            jdbcTemplate.update(sql);
+        } catch (Exception e) {
+            System.out.println(e);
+            return false;
+        }
+        return true;
+    }
+
+    public <T> boolean Delete(IDatabaseItem item, T key){
+        String sql = item.ToDELETE(key);
         try {
             jdbcTemplate.execute(sql);
         } catch (Exception e) {

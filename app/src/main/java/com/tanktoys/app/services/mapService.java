@@ -5,13 +5,15 @@ import java.util.List;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.tanktoys.app.models.Address;
 import com.tanktoys.app.models.Map;
 import com.tanktoys.app.models.User;
 import com.tanktoys.app.utils.customExceptions.AddressNotValidException;
 
-public class mapService {
+@Service
+public class MapService {
     
     @Autowired
     DatabaseService db;

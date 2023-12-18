@@ -19,6 +19,12 @@ public class Map {
     @NotNull(message = "name cannot be null")
     private String _name;
     
+    public Map(){
+        _arrMap = null;
+        _creator = null;
+        _name = null;
+    }
+
     public Map(int[][] positions, String creator, String name) throws PositionNotValidException, AddressNotValidException {
         _arrMap = new ArrayMap(positions);
         _creator = new Address(creator);
