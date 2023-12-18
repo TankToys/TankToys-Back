@@ -31,23 +31,28 @@ public class TankService {
     }
 
     public Tank[] getTanksByCreatorAddress(String creator) throws AddressNotValidException{
-        return null;
+        Tank tank = new Tank();
+        return (Tank[])db.SelectByKey(tank, "creator", creator).toArray();
     }
 
     public Tank[] getTanksByBullet(int bulletId){
-        return null;
+        Tank tank = new Tank();
+        return (Tank[])db.SelectByKey(tank, "bullet", bulletId).toArray();
     }
 
     public Tank[] getTanksByCannon(int cannonId){
-        return null;
+        Tank tank = new Tank();
+        return (Tank[])db.SelectByKey(tank, "cannon", cannonId).toArray();
     }
 
     public Tank[] getTanksByShell(int shellId){
-        return null;
+        Tank tank = new Tank();
+        return (Tank[])db.SelectByKey(tank, "shell", shellId).toArray();
     }
 
     public Tank[] getTanksByTrackWheel(int trackWheelId){
-        return null;
+        Tank tank = new Tank();
+        return (Tank[])db.SelectByKey(tank, "trackwheel", trackWheelId).toArray();
     }
 
     public boolean insertTank(Tank tank){

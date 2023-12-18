@@ -88,6 +88,11 @@ public class Map implements IDatabaseItem, ISerializable{
     }
 
     @Override
+    public <T> String ToSELECTKeyName(String keyName, T key) {
+        return "SELECT * FROM maps WHERE "+keyName+" LIKE '"+key+"';";
+    }
+
+    @Override
     public <T> String ToUPDATE(T key) {
         return "UPDATE maps SET id='"+_id+"', arrmap='"+_arrMap.GetPositions()+"', creator='"+_creator.GetAddress()+"', name='"+_name+"' WHERE id LIKE '"+key+"';";
     }

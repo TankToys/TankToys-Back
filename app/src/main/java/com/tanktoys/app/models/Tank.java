@@ -32,7 +32,7 @@ public class Tank implements IDatabaseItem, ISerializable{
     public Address _creator;
     
     public Tank(){
-        
+
     }
 
     public Tank(int id, Bullet bullet, Cannon cannon, Shell shell, TrackWheels trackWheels, String name, String creator) throws  AddressNotValidException {
@@ -114,6 +114,11 @@ public class Tank implements IDatabaseItem, ISerializable{
     @Override
     public <T> String ToSELECT(T key) {
         return "SELECT * FROM tank WHERE id LIKE '"+key+"';";
+    }
+
+    @Override
+    public <T> String ToSELECTKeyName(String keyName, T key) {
+        return "SELECT * FROM tank WHERE "+keyName+" LIKE '"+key+"';";
     }
 
     @Override

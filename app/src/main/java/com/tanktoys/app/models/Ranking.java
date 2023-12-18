@@ -58,6 +58,11 @@ public class Ranking implements IDatabaseItem {
     }
 
     @Override
+    public <T> String ToSELECTKeyName(String keyName, T key) {
+        return "SELECT * FROM ranking WHERE "+keyName+" LIKE '"+key+"';";
+    }
+
+    @Override
     public <T> String ToDELETE(T key) {
         return "DELETE FROM ranking WHERE address LIKE '"+key+"';";
     }
