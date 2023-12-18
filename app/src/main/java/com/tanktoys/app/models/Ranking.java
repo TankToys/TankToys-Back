@@ -18,23 +18,14 @@ public class Ranking implements IDatabaseItem {
     private Address _address;
     private Map<String, Integer> _modes;
 
-    private int _rankModeA;
-
-    private int _rankModeB;
-
-    private int _rankModeC;
-
-    public Ranking(String address, int rankModeA, int rankModeB, int rankModeC) throws AddressNotValidException {
-        SetRanking(address, rankModeA, rankModeB, rankModeC);
+    public Ranking(String address, Map<String, Integer> modes) throws AddressNotValidException {
+        SetRanking(address, _modes);
     }
 
-    public void SetRanking(String address, int rankModeA, int rankModeB, int rankModeC) throws AddressNotValidException {
+    public void SetRanking(String address, Map<String, Integer> modes) throws AddressNotValidException {
         _address = new Address(address);
-        _rankModeA = rankModeA;
-        _rankModeB = rankModeB;
-        _rankModeC = rankModeC;
+        _modes = modes;
     }
-
 
     public Map<String, Integer> GetModes(){
         return _modes;
