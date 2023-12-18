@@ -10,10 +10,9 @@ import com.tanktoys.app.interfaces.IDatabaseItem;
 @Component
 public class Ranking implements IDatabaseItem {
 
-    private String _user;
+    private Address _address;
     private Map<String, Integer> _modes;
 
-    
     public Map<String, Integer> GetModes(){
         return _modes;
     }
@@ -22,12 +21,12 @@ public class Ranking implements IDatabaseItem {
         _modes = modes;
     }
 
-    public String GetUser(){
-        return _user;
+    public Address GetUser(){
+        return _address;
     }
     
-    public void SetUser(String user){
-        _user = user;
+    public void SetUser(Address address){
+        _address = address;
     }
     
     @Override
