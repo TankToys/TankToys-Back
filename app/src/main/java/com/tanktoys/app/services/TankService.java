@@ -9,7 +9,7 @@ import com.tanktoys.app.models.Tank;
 import com.tanktoys.app.models.User;
 import com.tanktoys.app.utils.customExceptions.AddressNotValidException;
 
-public class tankService {
+public class TankService {
     @Autowired
     DatabaseService db;
 

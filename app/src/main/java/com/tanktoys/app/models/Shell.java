@@ -1,7 +1,5 @@
 package com.tanktoys.app.models;
 
-import java.util.Set;
-
 public class Shell {
     private int _hp;
     private String _type;

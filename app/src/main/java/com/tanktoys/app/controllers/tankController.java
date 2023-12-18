@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.tanktoys.app.services.tankService;
+import com.tanktoys.app.services.TankService;
 import com.tanktoys.app.utils.customExceptions.AddressNotValidException;
 
 @RestController
@@ -20,7 +20,7 @@ import com.tanktoys.app.utils.customExceptions.AddressNotValidException;
 public class tankController {
 
     @Autowired
-    tankService tank;
+    TankService tank;
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> getTankById(@PathVariable("id") int id) throws AddressNotValidException{
