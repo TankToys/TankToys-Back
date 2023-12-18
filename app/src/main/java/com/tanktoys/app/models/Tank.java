@@ -104,7 +104,7 @@ public class Tank implements IDatabaseItem, ISerializable{
     @Override
     public String ToINSERT() {
         return "INSERT INTO tank(id, bullet, cannon, shell, trackwheel, name, creator) VALUES ('"+_id+"', '"+_bullet.GetId()+"', '"
-        +_cannon.GetId()+"', '"+_shell.GetId()+"', '"+_trackWheels.GetId()+"', '"+_name+"', '"+_creator+"');";
+        +_cannon.GetId()+"', '"+_shell.GetId()+"', '"+_trackWheels.GetId()+"', '"+_name+"', '"+_creator.GetAddress()+"');";
     }
 
     @Override
@@ -115,7 +115,7 @@ public class Tank implements IDatabaseItem, ISerializable{
     @Override
     public <T> String ToUPDATE(T key) {
         return "UPDATE tank SET id='"+_id+"', bullet='"+_bullet.GetId()+"', cannon='"
-        +_cannon.GetId()+"', shell='"+_shell.GetId()+"', trackwheel='"+_trackWheels.GetId()+"', name='"+_name+"', creator='"+_creator+"' WHERE id LIKE '"+key+"';";
+        +_cannon.GetId()+"', shell='"+_shell.GetId()+"', trackwheel='"+_trackWheels.GetId()+"', name='"+_name+"', creator='"+_creator.GetAddress()+"' WHERE id LIKE '"+key+"';";
     }
 
     @Override
@@ -125,7 +125,13 @@ public class Tank implements IDatabaseItem, ISerializable{
 
     @Override
     public IDatabaseItem load(ResultSet rs, int rowNum) throws Exception {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'load'");
+        _id = rs.getInt(1);
+        _bullet.SetId(rs.getInt(2));
+        _cannon.SetId(rs.getInt(3));
+        _shell.SetId(rs.getInt(4));
+        _trackWheels.SetId(rs.getInt(5));
+        _name = rs.getString(6);
+        _creator.SetAddress(rs.getString(7));
+        return this;
     }
 }

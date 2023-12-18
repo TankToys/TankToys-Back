@@ -21,6 +21,10 @@ public class Shell {
         return _id;
     }
 
+    public void SetId(int id) {
+        _id = id;
+    }
+
     public int GetHp() {
         return _hp;
     }

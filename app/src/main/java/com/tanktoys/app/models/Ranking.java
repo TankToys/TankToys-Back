@@ -5,6 +5,7 @@ import com.tanktoys.app.utils.customExceptions.AddressNotValidException;
 import jakarta.validation.constraints.NotNull;
 
 import java.sql.ResultSet;
+import java.util.Arrays;
 import java.util.Map;
 
 import org.springframework.stereotype.Component;
@@ -48,7 +49,7 @@ public class Ranking implements IDatabaseItem {
     
     @Override
     public String ToINSERT() {
-        return "INSERT INTO ranking(address, modes) VALUES('"+_address+"','"+_modes.toString()+"')";
+        return "INSERT INTO ranking(address, modes) VALUES('"+_address.GetAddress()+"','"+_modes.toString()+"')";
     }
 
     @Override
@@ -63,13 +64,14 @@ public class Ranking implements IDatabaseItem {
     
     @Override
     public <T> String ToUPDATE(T key) {
-        return "UPDATE ranking SET address='"+_address+"', modes='"+_modes+"' WHERE address LIKE '"+key+"';";
+        return "UPDATE ranking SET address='"+_address.GetAddress()+"', modes='"+_modes.toString()+"' WHERE address LIKE '"+key+"';";
     }
 
     @Override
     public IDatabaseItem load(ResultSet rs, int rowNum) throws Exception {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'load'");
+        _address.SetAddress(rs.getString(1));
+        // _modes = rs.getString(2);
+        return this;
     }
 
 }
