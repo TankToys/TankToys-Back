@@ -25,6 +25,8 @@ public class TankService {
     }
 
     public Tank getTankById(int id){
+        Tank tank = new Tank();
+        db.SelectByKey(tank, id);
         return null;
     }
 
@@ -48,15 +50,16 @@ public class TankService {
         return null;
     }
 
-    public boolean insertTank(Tank Tank){
-        return true;
+    public boolean insertTank(Tank tank){
+        return db.Insert(tank);
     }
 
-    public boolean editTank(Tank Tank) {
-        return true;
+    public boolean editTank(Tank tank) {
+        return db.Update(tank, tank.GetId());
     }
 
     public boolean deleteTank(int id) {
-        return true;
+        Tank tank = new Tank();
+        return db.Delete(tank, id);
     }
 }

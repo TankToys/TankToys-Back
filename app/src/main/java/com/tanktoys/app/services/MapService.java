@@ -28,7 +28,9 @@ public class MapService {
     }
 
     public Map getMapById(int id){
-        return null;
+        Map map = new Map();
+        db.SelectByKey(map, id);
+        return map;
     }
 
     public Map[] getMapsByCreatorAddress(String creator) throws AddressNotValidException{
@@ -36,14 +38,15 @@ public class MapService {
     }
 
     public boolean insertMap(Map map){
-        return true;
+        return db.Insert(map);
     }
 
     public boolean editMap(Map map) {
-        return true;
+        return db.Update(map, map.GetId());
     }
 
     public boolean deleteMap(int id) {
-        return true;
+        Map map = new Map();
+        return db.Delete(map, id);
     }
 }
