@@ -32,19 +32,19 @@ public class TankService {
         return null;
     }
 
-    public Tank[] getTanksByBullet(String bulletName){
+    public Tank[] getTanksByBullet(int bulletId){
         return null;
     }
 
-    public Tank[] getTanksByCannon(String cannonName){
+    public Tank[] getTanksByCannon(int cannonId){
         return null;
     }
 
-    public Tank[] getTanksByShell(String shellName){
+    public Tank[] getTanksByShell(int shellId){
         return null;
     }
 
-    public Tank[] getTanksByTrackWheel(String trackWheelName){
+    public Tank[] getTanksByTrackWheel(int trackWheelId){
         return null;
     }
 

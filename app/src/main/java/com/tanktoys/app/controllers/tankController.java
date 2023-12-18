@@ -50,42 +50,42 @@ public class tankController {
 
     @Operation(summary = "${tankPath}/bullet/{name}")
     @ApiResponses(value = { @ApiResponse(responseCode = "200",  content = {
-            @Content(mediaType = "application/json", schema = @Schema(implementation = String.class))
+            @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = Tank.class)))
     }),
             @ApiResponse(responseCode = "400",  content = @Content) })
     @GetMapping(value = "/bullet/{name}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity getTanksByBullet(){
-        return new ResponseEntity(HttpStatus.OK);
+    public ResponseEntity<Tank[]> getTanksByBullet(@PathVariable("bulletId") int bulletId){
+        return new ResponseEntity<Tank[]>(tank.getTanksByBullet(bulletId) , HttpStatus.OK);
     }
 
     @Operation(summary = "${tankPath}/cannon/{name}")
     @ApiResponses(value = { @ApiResponse(responseCode = "200",  content = {
-            @Content(mediaType = "application/json", schema = @Schema(implementation = String.class))
+            @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = Tank.class)))
     }),
             @ApiResponse(responseCode = "400",  content = @Content) })
     @GetMapping(value = "/cannon/{name}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity getTanksByCannon(){
-        return new ResponseEntity(HttpStatus.OK);
+    public ResponseEntity<Tank[]> getTanksByCannon(@PathVariable("cannonId") int cannonId){
+        return new ResponseEntity<Tank[]>(tank.getTanksByCannon(cannonId), HttpStatus.OK);
     }
 
     @Operation(summary = "${tankPath}/shell/{name}")
     @ApiResponses(value = { @ApiResponse(responseCode = "200",  content = {
-            @Content(mediaType = "application/json", schema = @Schema(implementation = String.class))
+            @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = Tank.class)))
     }),
             @ApiResponse(responseCode = "400",  content = @Content) })
     @GetMapping(value = "/shell/{name}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity getTanksByShell(){
-        return new ResponseEntity(HttpStatus.OK);
+    public ResponseEntity<Tank[]> getTanksByShell(@PathVariable("shellId") int shellId){
+        return new ResponseEntity<Tank[]>(tank.getTanksByShell(shellId), HttpStatus.OK);
     }
 
     @Operation(summary = "${tankPath}/trackWheel/{name}")
     @ApiResponses(value = { @ApiResponse(responseCode = "200",  content = {
-            @Content(mediaType = "application/json", schema = @Schema(implementation = String.class))
+            @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = Tank.class)))
     }),
             @ApiResponse(responseCode = "400",  content = @Content) })
     @GetMapping(value = "/trackWheel/{name}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity getTanksByTrackWheel(){
-        return new ResponseEntity(HttpStatus.OK);
+    public ResponseEntity<Tank[]> getTanksByTrackWheel(@PathVariable("trackWheelId") int trackWheelId){
+        return new ResponseEntity<Tank[]>(tank.getTanksByTrackWheel(trackWheelId), HttpStatus.OK);
     }
 
     @Operation(summary = "${tankPath}")
