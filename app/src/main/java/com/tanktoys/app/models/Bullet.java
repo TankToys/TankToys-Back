@@ -1,12 +1,12 @@
 package com.tanktoys.app.models;
 
 public class Bullet {
-    private int _id;
-    private int _speed;
-    private int _dmg;
-    private int _bounces;
-    private String _name;
-    private String _type;
+    public int _id;
+    public int _speed;
+    public int _dmg;
+    public int _bounces;
+    public String _name;
+    public String _type;
 
     public Bullet(int id, int speed, int dmg, int bounces, String name, String type) {
         SetBullet(id, speed, dmg, bounces, name, type);

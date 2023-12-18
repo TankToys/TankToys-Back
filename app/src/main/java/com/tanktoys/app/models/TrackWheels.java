@@ -1,12 +1,12 @@
 package com.tanktoys.app.models;
 
 public class TrackWheels {
-    private int _id;
-    private int _speed;
-    private String _terrain;
-    private String _trackOrWheel;
-    private String _tankType;
-    private String _name;
+    public int _id;
+    public int _speed;
+    public String _terrain;
+    public String _trackOrWheel;
+    public String _tankType;
+    public String _name;
 
     public TrackWheels(int id, int speed, String terrain, String trackOrWheel, String tankType, String name) {
         SetTrackWheels(id, speed, terrain, trackOrWheel, tankType, name);

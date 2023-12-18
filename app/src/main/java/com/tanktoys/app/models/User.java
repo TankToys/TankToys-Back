@@ -65,22 +65,22 @@ public class User implements IDatabaseItem, ISerializable{
 
     @Override
     public <T> String ToSELECT(T key) {
-        return "SELECT * FROM addresses WHERE address LIKE '"+key+"'";
+        return "SELECT * FROM addresses WHERE address = '"+key+"'";
     }
 
     @Override
     public <T> String ToSELECTKeyName(String keyName, T key) {
-        return "SELECT * FROM addresses WHERE "+keyName+" LIKE '"+key+"'";
+        return "SELECT * FROM addresses WHERE "+keyName+" = '"+key+"'";
     }  
 
     @Override
     public <T> String ToUPDATE(T key) {
-        return "UPDATE addresses SET address='"+_address.toString()+"', username='"+_user+"', level='"+_level+"' WHERE address LIKE '"+key+"'";
+        return "UPDATE addresses SET address='"+_address.toString()+"', username='"+_user+"', level='"+_level+"' WHERE address = '"+key+"'";
     }
 
     @Override
     public <T> String ToDELETE(T key) {
-        return "DELETE FROM addresses WHERE address LIKE '"+key+"'";
+        return "DELETE FROM addresses WHERE address = '"+key+"'";
     }
 
     @Override

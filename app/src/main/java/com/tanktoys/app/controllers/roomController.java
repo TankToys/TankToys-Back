@@ -6,9 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import com.tanktoys.app.models.Address;
 import com.tanktoys.app.models.Room;
-import com.tanktoys.app.models.User;
 import com.tanktoys.app.services.RoomService;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -42,14 +40,14 @@ public class roomController {
 	//--------------------------------------------------INSERT ROOM--------------------------------------------------------
 
 	@Operation(summary = "${roomPath}")
-	@ApiResponses(value = { @ApiResponse(responseCode = "200", content = {
+	@ApiResponses(value = { @ApiResponse(responseCode = "201", content = {
 			@Content(mediaType = "application/json")
 	}),
 			@ApiResponse(responseCode = "400", content = @Content) })
 	@PostMapping( produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity insertRoom(@RequestBody Room requestRoom) {
 		if (roomService.editRoom(requestRoom)) {
-			return new ResponseEntity(HttpStatus.OK);
+			return new ResponseEntity(HttpStatus.CREATED);
 		}
 		return new ResponseEntity(HttpStatus.BAD_REQUEST);
 	}
@@ -57,14 +55,14 @@ public class roomController {
 	//--------------------------------------------------EDIT ROOM--------------------------------------------------------
 
 	@Operation(summary = "${roomPath}")
-	@ApiResponses(value = { @ApiResponse(responseCode = "200", content = {
+	@ApiResponses(value = { @ApiResponse(responseCode = "202", content = {
 			@Content(mediaType = "application/json")
 	}),
 			@ApiResponse(responseCode = "400", content = @Content) })
 	@PutMapping( produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity editRoom(@RequestBody Room requestRoom) {
 		if (roomService.editRoom(requestRoom)) {
-			return new ResponseEntity(HttpStatus.OK);
+			return new ResponseEntity(HttpStatus.ACCEPTED);
 		}
 		return new ResponseEntity(HttpStatus.BAD_REQUEST);
 	}
@@ -72,14 +70,14 @@ public class roomController {
 	//--------------------------------------------------DELETE ROOM--------------------------------------------------------
 
 	@Operation(summary = "${roomPath}")
-	@ApiResponses(value = { @ApiResponse(responseCode = "200", content = {
+	@ApiResponses(value = { @ApiResponse(responseCode = "202", content = {
 			@Content(mediaType = "application/json")
 	}),
 			@ApiResponse(responseCode = "400", content = @Content) })
 	@DeleteMapping( produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity deleteRoom(@PathVariable("id") int id) {
 		if (roomService.deleteRoom(id)) {
-            return new ResponseEntity(HttpStatus.OK);
+            return new ResponseEntity(HttpStatus.ACCEPTED);
         }
         return new ResponseEntity(HttpStatus.BAD_REQUEST);
 	}

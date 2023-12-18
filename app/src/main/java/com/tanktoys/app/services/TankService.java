@@ -24,10 +24,10 @@ public class TankService {
         return null;
     }
 
-    public Tank getTankById(int id){
+    public Tank getTankById(int id) throws AddressNotValidException{
         Tank tank = new Tank();
         db.SelectByKey(tank, id);
-        return null;
+        return tank;
     }
 
     public Tank[] getTanksByCreatorAddress(String creator) throws AddressNotValidException{
@@ -35,22 +35,22 @@ public class TankService {
         return (Tank[])db.SelectByKey(tank, "creator", creator).toArray();
     }
 
-    public Tank[] getTanksByBullet(int bulletId){
+    public Tank[] getTanksByBullet(int bulletId) throws AddressNotValidException{
         Tank tank = new Tank();
         return (Tank[])db.SelectByKey(tank, "bullet", bulletId).toArray();
     }
 
-    public Tank[] getTanksByCannon(int cannonId){
+    public Tank[] getTanksByCannon(int cannonId) throws AddressNotValidException{
         Tank tank = new Tank();
         return (Tank[])db.SelectByKey(tank, "cannon", cannonId).toArray();
     }
 
-    public Tank[] getTanksByShell(int shellId){
+    public Tank[] getTanksByShell(int shellId) throws AddressNotValidException{
         Tank tank = new Tank();
         return (Tank[])db.SelectByKey(tank, "shell", shellId).toArray();
     }
 
-    public Tank[] getTanksByTrackWheel(int trackWheelId){
+    public Tank[] getTanksByTrackWheel(int trackWheelId) throws AddressNotValidException{
         Tank tank = new Tank();
         return (Tank[])db.SelectByKey(tank, "trackwheel", trackWheelId).toArray();
     }
@@ -63,7 +63,7 @@ public class TankService {
         return db.Update(tank, tank.GetId());
     }
 
-    public boolean deleteTank(int id) {
+    public boolean deleteTank(int id) throws AddressNotValidException {
         Tank tank = new Tank();
         return db.Delete(tank, id);
     }

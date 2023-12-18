@@ -7,7 +7,13 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import com.fasterxml.jackson.annotation.PropertyAccessor;
+import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.tanktoys.app.models.Address;
 import com.tanktoys.app.models.Tank;
+import com.tanktoys.app.models.User;
 import com.tanktoys.app.services.TankService;
 import com.tanktoys.app.utils.customExceptions.AddressNotValidException;
 
@@ -36,8 +42,10 @@ public class tankController {
     }),
             @ApiResponse(responseCode = "400",  content = @Content) })
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Tank> getTankById(@PathVariable("id") int id) throws AddressNotValidException{
-        return new ResponseEntity<Tank>(tank.getTankById(id), HttpStatus.OK);
+    public ResponseEntity<String> getTankById(@PathVariable("id") int id) throws AddressNotValidException, JsonProcessingException{
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.setVisibility(PropertyAccessor.FIELD, Visibility.ANY);
+        return new ResponseEntity<String>(objectMapper.writeValueAsString(tank.getTankById(id)), HttpStatus.OK);
     }
 
     //--------------------------------------------------GET TANKS BY CREATOR ADDRESS--------------------------------------------------------
@@ -60,7 +68,7 @@ public class tankController {
     }),
             @ApiResponse(responseCode = "400",  content = @Content) })
     @GetMapping(value = "/bullet/{name}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Tank[]> getTanksByBullet(@PathVariable("bulletId") int bulletId){
+    public ResponseEntity<Tank[]> getTanksByBullet(@PathVariable("bulletId") int bulletId) throws AddressNotValidException{
         return new ResponseEntity<Tank[]>(tank.getTanksByBullet(bulletId) , HttpStatus.OK);
     }
 
@@ -72,7 +80,7 @@ public class tankController {
     }),
             @ApiResponse(responseCode = "400",  content = @Content) })
     @GetMapping(value = "/cannon/{name}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Tank[]> getTanksByCannon(@PathVariable("cannonId") int cannonId){
+    public ResponseEntity<Tank[]> getTanksByCannon(@PathVariable("cannonId") int cannonId) throws AddressNotValidException{
         return new ResponseEntity<Tank[]>(tank.getTanksByCannon(cannonId), HttpStatus.OK);
     }
 
@@ -84,7 +92,7 @@ public class tankController {
     }),
             @ApiResponse(responseCode = "400",  content = @Content) })
     @GetMapping(value = "/shell/{name}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Tank[]> getTanksByShell(@PathVariable("shellId") int shellId){
+    public ResponseEntity<Tank[]> getTanksByShell(@PathVariable("shellId") int shellId) throws AddressNotValidException{
         return new ResponseEntity<Tank[]>(tank.getTanksByShell(shellId), HttpStatus.OK);
     }
 
@@ -96,43 +104,52 @@ public class tankController {
     }),
             @ApiResponse(responseCode = "400",  content = @Content) })
     @GetMapping(value = "/trackWheel/{name}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Tank[]> getTanksByTrackWheel(@PathVariable("trackWheelId") int trackWheelId){
+    public ResponseEntity<Tank[]> getTanksByTrackWheel(@PathVariable("trackWheelId") int trackWheelId) throws AddressNotValidException{
         return new ResponseEntity<Tank[]>(tank.getTanksByTrackWheel(trackWheelId), HttpStatus.OK);
     }
 
     //--------------------------------------------------INSET TANK--------------------------------------------------------
 
     @Operation(summary = "${tankPath}")
-    @ApiResponses(value = { @ApiResponse(responseCode = "200",  content = {
-            @Content(mediaType = "application/json", schema = @Schema(implementation = String.class))
+    @ApiResponses(value = { @ApiResponse(responseCode = "201",  content = {
+            @Content(mediaType = "application/json")
     }),
             @ApiResponse(responseCode = "400",  content = @Content) })
     @PostMapping( produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity insertTank(){
-        return new ResponseEntity(HttpStatus.OK);
+    public ResponseEntity insertTank(@RequestBody Tank requestTank){
+        if (tank.insertTank(requestTank)) {
+            return new ResponseEntity(HttpStatus.CREATED);
+        }
+		return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 
     //--------------------------------------------------EDIT TANK--------------------------------------------------------
 
     @Operation(summary = "${tankPath}")
-    @ApiResponses(value = { @ApiResponse(responseCode = "200",  content = {
-            @Content(mediaType = "application/json", schema = @Schema(implementation = String.class))
+    @ApiResponses(value = { @ApiResponse(responseCode = "202",  content = {
+            @Content(mediaType = "application/json")
     }),
             @ApiResponse(responseCode = "400",  content = @Content) })
     @PutMapping( produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity editTank(){
-        return new ResponseEntity(HttpStatus.OK);
+    public ResponseEntity editTank(@RequestBody Tank requestTank){
+        if (tank.editTank(requestTank)) {
+            return new ResponseEntity(HttpStatus.ACCEPTED);
+        }
+		return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 
     //--------------------------------------------------DELETE TANK--------------------------------------------------------
 
     @Operation(summary = "${tankPath}")
-    @ApiResponses(value = { @ApiResponse(responseCode = "200",  content = {
-            @Content(mediaType = "application/json", schema = @Schema(implementation = String.class))
+    @ApiResponses(value = { @ApiResponse(responseCode = "202",  content = {
+            @Content(mediaType = "application/json")
     }),
             @ApiResponse(responseCode = "400",  content = @Content) })
     @DeleteMapping( produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity deleteTank(){
-        return new ResponseEntity(HttpStatus.OK);
+    public ResponseEntity deleteTank(@PathVariable("tankId") int tankId) throws AddressNotValidException{
+        if (tank.deleteTank(tankId)) {
+            return new ResponseEntity(HttpStatus.ACCEPTED);
+        }
+		return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 }

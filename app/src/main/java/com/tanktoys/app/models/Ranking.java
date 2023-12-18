@@ -2,10 +2,7 @@ package com.tanktoys.app.models;
 
 import com.tanktoys.app.utils.customExceptions.AddressNotValidException;
 
-import jakarta.validation.constraints.NotNull;
-
 import java.sql.ResultSet;
-import java.util.Arrays;
 import java.util.Map;
 
 import org.springframework.stereotype.Component;
@@ -15,8 +12,8 @@ import com.tanktoys.app.interfaces.IDatabaseItem;
 @Component
 public class Ranking implements IDatabaseItem {
 
-    private Address _address;
-    private Map<String, Integer> _modes;
+    public Address _address;
+    public Map<String, Integer> _modes;
 
     public Ranking(){
         
@@ -54,22 +51,22 @@ public class Ranking implements IDatabaseItem {
 
     @Override
     public <T> String ToSELECT(T key) {
-        return "SELECT * FROM ranking WHERE address LIKE '"+key+"';";
+        return "SELECT * FROM ranking WHERE address = '"+key+"';";
     }
 
     @Override
     public <T> String ToSELECTKeyName(String keyName, T key) {
-        return "SELECT * FROM ranking WHERE "+keyName+" LIKE '"+key+"';";
+        return "SELECT * FROM ranking WHERE "+keyName+" = '"+key+"';";
     }
 
     @Override
     public <T> String ToDELETE(T key) {
-        return "DELETE FROM ranking WHERE address LIKE '"+key+"';";
+        return "DELETE FROM ranking WHERE address = '"+key+"';";
     }
     
     @Override
     public <T> String ToUPDATE(T key) {
-        return "UPDATE ranking SET address='"+_address.GetAddress()+"', modes='"+_modes.toString()+"' WHERE address LIKE '"+key+"';";
+        return "UPDATE ranking SET address='"+_address.GetAddress()+"', modes='"+_modes.toString()+"' WHERE address = '"+key+"';";
     }
 
     @Override

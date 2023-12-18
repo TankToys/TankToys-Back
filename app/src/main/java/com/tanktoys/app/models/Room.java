@@ -24,10 +24,10 @@ public class Room implements IDatabaseItem, ISerializable {
         GAMEMODE3
     }
 
-    private int _id;
-    private List<String> _guestList = new ArrayList<String>();
-    private String _host;
-    private gameModes _gameMode;
+    public int _id;
+    public List<String> _guestList = new ArrayList<String>();
+    public String _host;
+    public gameModes _gameMode;
 
     public int GetId() {
         return _id;
@@ -74,7 +74,7 @@ public class Room implements IDatabaseItem, ISerializable {
 
     @Override
     public <T> String ToSELECTKeyName(String keyName, T key) {
-        return "SELECT * FROM rooms WHERE "+keyName+" LIKE '"+key+"'";
+        return "SELECT * FROM rooms WHERE "+keyName+" = '"+key+"'";
     }
 
     @Override

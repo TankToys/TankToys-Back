@@ -44,14 +44,14 @@ public class userController {
     //--------------------------------------------------INSERT USER--------------------------------------------------------
 
     @Operation(summary = "${userPath}")
-    @ApiResponses(value = { @ApiResponse(responseCode = "200", content = {
+    @ApiResponses(value = { @ApiResponse(responseCode = "201", content = {
             @Content(mediaType = "application/json")
     }),
             @ApiResponse(responseCode = "400", content = @Content) })
     @PostMapping( produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity insertUser(@RequestBody User requestUser) throws JSONException, AddressNotValidException {
         if (user.insertUser(requestUser)) {
-            return new ResponseEntity(HttpStatus.OK);
+            return new ResponseEntity(HttpStatus.CREATED);
         }
         return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
@@ -59,14 +59,14 @@ public class userController {
     //--------------------------------------------------EDIT USER--------------------------------------------------------
 
     @Operation(summary = "${userPath}")
-    @ApiResponses(value = { @ApiResponse(responseCode = "200", content = {
+    @ApiResponses(value = { @ApiResponse(responseCode = "202", content = {
             @Content(mediaType = "application/json")
     }),
             @ApiResponse(responseCode = "400", content = @Content) })
     @PutMapping( produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity editUser(@RequestBody User requestUser) throws JSONException, AddressNotValidException {
         if (user.editUser(requestUser)) {
-            return new ResponseEntity(HttpStatus.OK);
+            return new ResponseEntity(HttpStatus.ACCEPTED);
         }
         return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
@@ -74,14 +74,14 @@ public class userController {
     //--------------------------------------------------DELETE USER--------------------------------------------------------
 
     @Operation(summary = "${userPath}")
-    @ApiResponses(value = { @ApiResponse(responseCode = "200", content = {
+    @ApiResponses(value = { @ApiResponse(responseCode = "202", content = {
             @Content(mediaType = "application/json")
     }),
             @ApiResponse(responseCode = "400", content = @Content) })
     @DeleteMapping( produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity deleteUser(@PathVariable("address") Address address) throws AddressNotValidException {
         if (user.deleteUser(address)) {
-            return new ResponseEntity(HttpStatus.OK);
+            return new ResponseEntity(HttpStatus.ACCEPTED);
         }
         return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }

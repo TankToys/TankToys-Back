@@ -4,7 +4,7 @@ import com.tanktoys.app.utils.PositionValidator;
 import com.tanktoys.app.utils.customExceptions.PositionNotValidException;
 
 public class ArrayMap {
-    private String[] _positions;
+    public String[] _positions;
 
     public ArrayMap(String[] positions) throws PositionNotValidException {
         SetPositions(positions);

@@ -2,6 +2,7 @@ package com.tanktoys.app.models;
 
 import java.sql.ResultSet;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.tanktoys.app.interfaces.IDatabaseItem;
 import com.tanktoys.app.interfaces.ISerializable;
 import com.tanktoys.app.utils.customExceptions.AddressNotValidException;
@@ -11,7 +12,7 @@ import jakarta.validation.constraints.NotNull;
 public class Tank implements IDatabaseItem, ISerializable{
 
     @NotNull(message = "Id cannot be null")
-    private int _id;
+    public int _id;
 
     @NotNull(message = "Bullet cannot be null")
     public Bullet _bullet;
@@ -31,11 +32,17 @@ public class Tank implements IDatabaseItem, ISerializable{
     @NotNull(message = "Creator cannot be null")
     public Address _creator;
     
-    public Tank(){
-
+    public Tank() throws AddressNotValidException{
+        _id = 0;
+        _bullet = new Bullet(0, 0, 0, 0, "_name", "_name");
+        _cannon = new Cannon(0, 0, 0, "_name", "_name");
+        _shell = new Shell(0, 0, "_name", "_name");
+        _trackWheels = new TrackWheels(0, 0, "_name", "_name", "_name", "_name");
+        _name = "name";
+        _creator = new Address("0x0000000000000000000000000000000000000000");
     }
 
-    public Tank(int id, Bullet bullet, Cannon cannon, Shell shell, TrackWheels trackWheels, String name, String creator) throws  AddressNotValidException {
+    public Tank(@JsonProperty("_id")int id, @JsonProperty("_bullet")Bullet bullet, @JsonProperty("_cannon")Cannon cannon, @JsonProperty("_shell")Shell shell, @JsonProperty("_trackWheels")TrackWheels trackWheels, @JsonProperty("_name")String name, @JsonProperty("_creator")String creator) throws  AddressNotValidException {
         _id = id;
         _bullet = bullet;
         _cannon = cannon;
@@ -95,41 +102,39 @@ public class Tank implements IDatabaseItem, ISerializable{
 
     @Override
     public String toJSON() {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'toJSON'");
     }
 
     @Override
     public ISerializable fromJSON(String JSON) throws Exception {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'fromJSON'");
     }
 
     @Override
     public String ToINSERT() {
-        return "INSERT INTO tank(id, bullet, cannon, shell, trackwheel, name, creator) VALUES ('"+_id+"', '"+_bullet.GetId()+"', '"
+        return "INSERT INTO tank( bullet, cannon, shell, trackwheel, name, creator) VALUES ('"+_bullet.GetId()+"', '"
         +_cannon.GetId()+"', '"+_shell.GetId()+"', '"+_trackWheels.GetId()+"', '"+_name+"', '"+_creator.GetAddress()+"');";
     }
 
     @Override
     public <T> String ToSELECT(T key) {
-        return "SELECT * FROM tank WHERE id LIKE '"+key+"';";
+        return "SELECT * FROM tank WHERE id = '"+key+"';";
     }
 
     @Override
     public <T> String ToSELECTKeyName(String keyName, T key) {
-        return "SELECT * FROM tank WHERE "+keyName+" LIKE '"+key+"';";
+        return "SELECT * FROM tank WHERE "+keyName+" = '"+key+"';";
     }
 
     @Override
     public <T> String ToUPDATE(T key) {
         return "UPDATE tank SET id='"+_id+"', bullet='"+_bullet.GetId()+"', cannon='"
-        +_cannon.GetId()+"', shell='"+_shell.GetId()+"', trackwheel='"+_trackWheels.GetId()+"', name='"+_name+"', creator='"+_creator.GetAddress()+"' WHERE id LIKE '"+key+"';";
+        +_cannon.GetId()+"', shell='"+_shell.GetId()+"', trackwheel='"+_trackWheels.GetId()+"', name='"+_name+"', creator='"+_creator.GetAddress()+"' WHERE id = '"+key+"';";
     }
 
     @Override
     public <T> String ToDELETE(T key) {
-        return "DELETE FROM tank WHERE id LIKE '"+key+"';";
+        return "DELETE FROM tank WHERE id = '"+key+"';";
     }
 
     @Override

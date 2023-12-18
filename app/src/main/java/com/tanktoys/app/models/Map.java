@@ -1,7 +1,6 @@
 package com.tanktoys.app.models;
 
 import java.sql.ResultSet;
-import java.util.Arrays;
 
 import org.springframework.stereotype.Component;
 
@@ -16,16 +15,16 @@ import jakarta.validation.constraints.NotNull;
 public class Map implements IDatabaseItem, ISerializable{
     
     @NotNull(message = "Id cannot be null")
-    private int _id;
+    public int _id;
 
     @NotNull(message = "ArrMap cannot be null")
-    private ArrayMap _arrMap;
+    public ArrayMap _arrMap;
 
     @NotNull(message = "Creator cannot be null")
-    private Address _creator;
+    public Address _creator;
 
     @NotNull(message = "Name cannot be null")
-    private String _name;
+    public String _name;
     
     public Map(){
         _id = 0;
@@ -84,22 +83,22 @@ public class Map implements IDatabaseItem, ISerializable{
 
     @Override
     public <T> String ToSELECT(T key) {
-        return "SELECT * FROM maps WHERE id LIKE '"+key+"';";
+        return "SELECT * FROM maps WHERE id = '"+key+"';";
     }
 
     @Override
     public <T> String ToSELECTKeyName(String keyName, T key) {
-        return "SELECT * FROM maps WHERE "+keyName+" LIKE '"+key+"';";
+        return "SELECT * FROM maps WHERE "+keyName+" = '"+key+"';";
     }
 
     @Override
     public <T> String ToUPDATE(T key) {
-        return "UPDATE maps SET id='"+_id+"', arrmap='"+_arrMap.GetPositions()+"', creator='"+_creator.GetAddress()+"', name='"+_name+"' WHERE id LIKE '"+key+"';";
+        return "UPDATE maps SET id='"+_id+"', arrmap='"+_arrMap.GetPositions()+"', creator='"+_creator.GetAddress()+"', name='"+_name+"' WHERE id = '"+key+"';";
     }
 
     @Override
     public <T> String ToDELETE(T key) {
-        return "DELETE FROM maps WHERE id LIKE '"+key+"';";
+        return "DELETE FROM maps WHERE id = '"+key+"';";
     }
 
     @Override

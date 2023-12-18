@@ -14,7 +14,7 @@ import com.tanktoys.app.interfaces.IDatabaseItem;
 public class DatabaseService {
 
     @Autowired
-    private JdbcTemplate jdbcTemplate;
+    public JdbcTemplate jdbcTemplate;
 
     public <T> List<IDatabaseItem> SelectByKey(IDatabaseItem item, T key) {
         String sql = item.ToSELECT(key);

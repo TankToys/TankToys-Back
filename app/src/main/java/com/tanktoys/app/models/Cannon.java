@@ -1,11 +1,11 @@
 package com.tanktoys.app.models;
 
 public class Cannon {
-    private int _id;
-    private int _reloadSpeed;
-    private int _amo;
-    private String _name;
-    private String _bulletType;
+    public int _id;
+    public int _reloadSpeed;
+    public int _amo;
+    public String _name;
+    public String _bulletType;
 
     public Cannon(int id, int reloadSpeed, int amo, String name, String bulletType) {
         SetCannon(id, reloadSpeed, amo, name, bulletType);
