@@ -27,50 +27,50 @@ public class mapController {
     MapService map;
 
     @Operation(summary = "${mapPath}/{id}")
-    @ApiResponses(value = { @ApiResponse(responseCode = "200", description = "${}", content = {
+    @ApiResponses(value = { @ApiResponse(responseCode = "200",  content = {
             @Content(mediaType = "application/json", schema = @Schema(implementation = String.class))
     }),
-            @ApiResponse(responseCode = "400", description = "${}", content = @Content) })
+            @ApiResponse(responseCode = "400",  content = @Content) })
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> getMapById(@PathVariable("id") int id) throws AddressNotValidException{
         return new ResponseEntity<String>(map.getMapById(id).toString(), HttpStatus.OK);
     }
 
     @Operation(summary = "${mapPath}/creator/{address}")
-    @ApiResponses(value = { @ApiResponse(responseCode = "200", description = "${}", content = {
+    @ApiResponses(value = { @ApiResponse(responseCode = "200",  content = {
             @Content(mediaType = "application/json", schema = @Schema(implementation = String.class))
     }),
-            @ApiResponse(responseCode = "400", description = "${}", content = @Content) })
+            @ApiResponse(responseCode = "400",  content = @Content) })
     @GetMapping(value = "/creator/{address}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> getMapsByCreatorAddress(@PathVariable("address") String address) throws AddressNotValidException{
         return new ResponseEntity<String>(map.getMapsByCreatorAddress(address).toString(), HttpStatus.OK);
     }
 
     @Operation(summary = "${mapPath}")
-    @ApiResponses(value = { @ApiResponse(responseCode = "200", description = "${}", content = {
+    @ApiResponses(value = { @ApiResponse(responseCode = "200",  content = {
             @Content(mediaType = "application/json", schema = @Schema(implementation = String.class))
     }),
-            @ApiResponse(responseCode = "400", description = "${}", content = @Content) })
+            @ApiResponse(responseCode = "400",  content = @Content) })
     @PostMapping( produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity insertMap(){
         return null;
     }
 
     @Operation(summary = "${mapPath}")
-    @ApiResponses(value = { @ApiResponse(responseCode = "200", description = "${}", content = {
+    @ApiResponses(value = { @ApiResponse(responseCode = "200",  content = {
             @Content(mediaType = "application/json", schema = @Schema(implementation = String.class))
     }),
-            @ApiResponse(responseCode = "400", description = "${}", content = @Content) })
+            @ApiResponse(responseCode = "400",  content = @Content) })
     @PutMapping( produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity editMap(){
         return null;
     }
 
     @Operation(summary = "${mapPath}")
-    @ApiResponses(value = { @ApiResponse(responseCode = "200", description = "${}", content = {
+    @ApiResponses(value = { @ApiResponse(responseCode = "200",  content = {
             @Content(mediaType = "application/json", schema = @Schema(implementation = String.class))
     }),
-            @ApiResponse(responseCode = "400", description = "${}", content = @Content) })
+            @ApiResponse(responseCode = "400",  content = @Content) })
     @DeleteMapping( produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity deleteMap(){
         return null;

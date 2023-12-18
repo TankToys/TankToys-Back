@@ -31,6 +31,10 @@ public class Tank implements IDatabaseItem, ISerializable{
     @NotNull(message = "Creator cannot be null")
     public Address _creator;
     
+    public Tank(){
+        
+    }
+
     public Tank(int id, Bullet bullet, Cannon cannon, Shell shell, TrackWheels trackWheels, String name, String creator) throws  AddressNotValidException {
         _id = id;
         _bullet = bullet;
