@@ -24,6 +24,10 @@ public class TrackWheels {
     public int GetId() {
         return _id;
     }
+    
+    public void SetId(int id) {
+        _id = id;
+    }
 
     public int GetSpeed() {
         return _speed;

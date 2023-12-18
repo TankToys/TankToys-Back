@@ -1,6 +1,7 @@
 package com.tanktoys.app.models;
 
 import java.sql.ResultSet;
+import java.util.Arrays;
 
 import org.springframework.stereotype.Component;
 
@@ -78,8 +79,7 @@ public class Map implements IDatabaseItem, ISerializable{
 
     @Override
     public String ToINSERT() {
-        // TODO Auto-generated method stub
-        return "INSERT INTO maps(id, arrmap, creator, name) VALUES('"+_id+"','"+_arrMap+"','"+_creator+"','"+_name+"')";
+        return "INSERT INTO maps(id, arrmap, creator, name) VALUES('"+_id+"','"+_arrMap.GetPositions()+"','"+_creator.GetAddress()+"','"+_name+"')";
     }
 
     @Override
@@ -89,7 +89,7 @@ public class Map implements IDatabaseItem, ISerializable{
 
     @Override
     public <T> String ToUPDATE(T key) {
-        return "UPDATE maps SET id='"+_id+"', arrmap='"+_arrMap+"', creator='"+_creator+"', name='"+_name+"' WHERE id LIKE '"+key+"';";
+        return "UPDATE maps SET id='"+_id+"', arrmap='"+_arrMap.GetPositions()+"', creator='"+_creator.GetAddress()+"', name='"+_name+"' WHERE id LIKE '"+key+"';";
     }
 
     @Override
@@ -99,8 +99,11 @@ public class Map implements IDatabaseItem, ISerializable{
 
     @Override
     public IDatabaseItem load(ResultSet rs, int rowNum) throws Exception {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'load'");
+        _id = rs.getInt(1);
+        _arrMap.SetPositions((String[]) rs.getArray(2).getArray());
+        _creator.SetAddress(rs.getString(3));
+        _name = rs.getString(4);
+        return this;
     }
 
 }
