@@ -1,5 +1,4 @@
 package com.tanktoys.app.models;
-import java.util.Set;
 
 import com.tanktoys.app.utils.customExceptions.AddressNotValidException;
 
@@ -17,6 +16,10 @@ public class Ranking implements IDatabaseItem {
 
     private Address _address;
     private Map<String, Integer> _modes;
+
+    public Ranking(){
+        
+    }
 
     public Ranking(String address, Map<String, Integer> modes) throws AddressNotValidException {
         SetRanking(address, _modes);

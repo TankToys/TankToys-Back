@@ -6,48 +6,73 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.bind.annotation.*;
 import com.tanktoys.app.models.Address;
+import com.tanktoys.app.models.User;
 import com.tanktoys.app.services.UserService;
 import com.tanktoys.app.utils.customExceptions.AddressNotValidException;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 @RestController
 @EnableAutoConfiguration
+@Tag(name = "${userPath}")
 @RequestMapping("${userPath}")
 public class userController {
 
     @Autowired
     UserService user;
 
-    @RequestMapping(value = "/{address}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> getUserByAddress(@PathVariable("address") String address) throws AddressNotValidException{
+    @Operation(summary = "${userPath}/{address}")
+    @ApiResponses(value = { @ApiResponse(responseCode = "200", content = {
+            @Content(mediaType = "application/json", schema = @Schema(implementation = User.class))
+    }),
+            @ApiResponse(responseCode = "400", content = @Content) })
+    @GetMapping(value = "/{address}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> getUserByAddress(@PathVariable("address") Address address)
+            throws AddressNotValidException {
         return new ResponseEntity<String>(user.getUserByAddress(address).toJSON(), HttpStatus.OK);
     }
 
-    @RequestMapping(method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity insertUser(@RequestBody String requestUser) throws JSONException, AddressNotValidException{
-        if (user.insertUser(user.JSONToUser(requestUser))) {
+    @Operation(summary = "${userPath}")
+    @ApiResponses(value = { @ApiResponse(responseCode = "200", content = {
+            @Content(mediaType = "application/json")
+    }),
+            @ApiResponse(responseCode = "400", content = @Content) })
+    @PostMapping( produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity insertUser(@RequestBody User requestUser) throws JSONException, AddressNotValidException {
+        if (user.insertUser(requestUser)) {
             return new ResponseEntity(HttpStatus.OK);
         }
         return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 
-    @RequestMapping(method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity editUser(@RequestBody String requestUser) throws JSONException, AddressNotValidException{
-        if (user.editUser(user.JSONToUser(requestUser))) {
+    @Operation(summary = "${userPath}")
+    @ApiResponses(value = { @ApiResponse(responseCode = "200", content = {
+            @Content(mediaType = "application/json")
+    }),
+            @ApiResponse(responseCode = "400", content = @Content) })
+    @PutMapping( produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity editUser(@RequestBody User requestUser) throws JSONException, AddressNotValidException {
+        if (user.editUser(requestUser)) {
             return new ResponseEntity(HttpStatus.OK);
         }
         return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 
-    @RequestMapping(method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity deleteUser(@RequestBody String address) throws AddressNotValidException{
-        if (user.deleteUser(new Address(address))) {
+    @Operation(summary = "${userPath}")
+    @ApiResponses(value = { @ApiResponse(responseCode = "200", content = {
+            @Content(mediaType = "application/json")
+    }),
+            @ApiResponse(responseCode = "400", content = @Content) })
+    @DeleteMapping( produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity deleteUser(@PathVariable("address") Address address) throws AddressNotValidException {
+        if (user.deleteUser(address)) {
             return new ResponseEntity(HttpStatus.OK);
         }
         return new ResponseEntity(HttpStatus.BAD_REQUEST);

@@ -19,13 +19,13 @@ import jakarta.validation.constraints.NotNull;
 public class User implements IDatabaseItem, ISerializable{
 
     @NotNull(message = "address cannot be null")
-    private Address _address;
+    public Address _address;
     
     @NotNull(message = "username cannot be null")
-    private String _user;
+    public String _user;
 
     @NotNull(message = "level cannot be null")
-    private int _level;
+    public int _level;
     
     public User() throws AddressNotValidException{
         _address = new Address("0x0000000000000000000000000000000000000000");

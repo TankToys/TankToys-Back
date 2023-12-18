@@ -8,22 +8,22 @@ import jakarta.validation.constraints.NotNull;
 public class Tank {
 
     @NotNull(message = "Bullet cannot be null")
-    private Bullet _bullet;
+    public Bullet _bullet;
 
     @NotNull(message = "Cannon cannot be null")
-    private Cannon _cannon;
+    public Cannon _cannon;
 
     @NotNull(message = "Sheel cannot be null")
-    private Shell _shell;
+    public Shell _shell;
 
     @NotNull(message = "TrackWheels cannot be null")
-    private TrackWheels _trackWheels;
+    public TrackWheels _trackWheels;
 
     @NotNull(message = "Name cannot be null")
-    private String _name;
+    public String _name;
 
     @NotNull(message = "Creator cannot be null")
-    private Address _creator;
+    public Address _creator;
     
     public Tank(Bullet bullet, Cannon cannon, Shell shell, TrackWheels trackWheels, String name, String creator) throws  AddressNotValidException {
         _bullet = bullet;

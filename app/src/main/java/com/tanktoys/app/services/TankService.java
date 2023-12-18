@@ -4,11 +4,13 @@ import java.util.List;
 
 import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.tanktoys.app.models.Tank;
 import com.tanktoys.app.models.User;
 import com.tanktoys.app.utils.customExceptions.AddressNotValidException;
 
+@Service
 public class TankService {
     @Autowired
     DatabaseService db;

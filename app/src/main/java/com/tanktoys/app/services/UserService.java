@@ -33,6 +33,12 @@ public class UserService {
         return user;
     }
 
+    public User getUserByAddress(Address address) throws AddressNotValidException{
+        User user = new User();
+        db.SelectByKey(user, address.toString());
+        return user;
+    }
+
     public boolean insertUser(User user){
         return db.Insert(user);
     }

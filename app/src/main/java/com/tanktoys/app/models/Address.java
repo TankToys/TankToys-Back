@@ -4,7 +4,7 @@ import com.tanktoys.app.utils.AddressValidator;
 import com.tanktoys.app.utils.customExceptions.AddressNotValidException;
 
 public class Address {
-    private String _address;
+    public String _address;
 
     public Address(String address) throws AddressNotValidException {
         SetAddress(address);
