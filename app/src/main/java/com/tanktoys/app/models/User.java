@@ -9,58 +9,61 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.tanktoys.app.interfaces.IDatabaseItem;
-import com.tanktoys.app.interfaces.ISerializable;
 import com.tanktoys.app.utils.customExceptions.AddressNotValidException;
 
 import jakarta.validation.constraints.NotNull;
 
 @Component
-public class User implements IDatabaseItem, ISerializable{
+public class User implements IDatabaseItem{
 
     @NotNull(message = "address cannot be null")
-    public Address _address;
+    @JsonProperty("address")
+    public Address address;
     
     @NotNull(message = "username cannot be null")
-    public String _user;
+    @JsonProperty("user")
+    public String user;
 
     @NotNull(message = "level cannot be null")
-    public int _level;
+    @JsonProperty("level")
+    public int level;
     
     public User() throws AddressNotValidException{
-        _address = new Address("0x0000000000000000000000000000000000000000");
-        _level = 0;
+        address = new Address("0x0000000000000000000000000000000000000000");
+        level = 0;
     }
 
     public User(String address, String user, int level) throws AddressNotValidException{
-        _address = new Address(address);
-        _user = user;
-        _level = level;
+        this.address = new Address(address);
+        this.user = user;
+        this.level = level;
     }
 
     public String Getuser(){
-        return _user;
+        return user;
     }
     
     public void Setuser(String user){
-        _user = user;
+        this.user = user;
     }
     public Address Getaddress(){
-        return _address;
+        return address;
     }
     
     public int GetLevel(){
-        return _level;
+        return level;
     }
     
     public void SetLevel(int level){
-        _level = level;
+        this.level = level;
     }
 
 
     @Override
     public String ToINSERT() {
-        return "INSERT INTO addresses(address, username, level) VALUES('"+_address.toString()+"','"+_user+"', 0)";
+        return "INSERT INTO addresses(address, username, level) VALUES('"+address.toString()+"','"+user+"', 0)";
     }
 
     @Override
@@ -75,7 +78,7 @@ public class User implements IDatabaseItem, ISerializable{
 
     @Override
     public <T> String ToUPDATE(T key) {
-        return "UPDATE addresses SET address='"+_address.toString()+"', username='"+_user+"', level='"+_level+"' WHERE address = '"+key+"'";
+        return "UPDATE addresses SET address='"+address.toString()+"', username='"+user+"', level='"+level+"' WHERE address = '"+key+"'";
     }
 
     @Override
@@ -85,28 +88,8 @@ public class User implements IDatabaseItem, ISerializable{
 
     @Override
     public User load(ResultSet rs, int rowNum) throws AddressNotValidException, SQLException {
-        _address.SetAddress(rs.getString(1));
-        _user = rs.getString(2);   
+        address.SetAddress(rs.getString(1));
+        user = rs.getString(2);   
         return this;
     }
-
-    @Override
-    public String toJSON() {
-        JSONObject jsonObject = new JSONObject();
-        Map<String, Object> userMap = new HashMap<String, Object>();
-        userMap.put("address", _address.GetAddress());
-        userMap.put("user", _user);
-        userMap.put("level", _level);
-        jsonObject.put("user", userMap);
-        return jsonObject.toString();
-    }
-
-    @Override
-    public User fromJSON(String JSON) throws JSONException, AddressNotValidException{
-        JSONObject object = new JSONObject(JSON);
-        _address.SetAddress(object.getString("address"));
-        _user = object.getString("user");
-        _level = object.getInt("level");
-        return this;
-    }  
 }

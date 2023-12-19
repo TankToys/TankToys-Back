@@ -3,20 +3,15 @@ package com.tanktoys.app.models;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.List;
 
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.tanktoys.app.interfaces.IDatabaseItem;
-import com.tanktoys.app.interfaces.ISerializable;
-import com.tanktoys.app.utils.customExceptions.AddressNotValidException;
 
 @Component
-public class Room implements IDatabaseItem, ISerializable {
+public class Room implements IDatabaseItem {
 
     public enum gameModes {
         GAMEMODE1,
@@ -24,47 +19,51 @@ public class Room implements IDatabaseItem, ISerializable {
         GAMEMODE3
     }
 
-    public int _id;
-    public List<String> _guestList = new ArrayList<String>();
-    public String _host;
-    public gameModes _gameMode;
+    @JsonProperty("id")
+    public int id;
+    @JsonProperty("guestList")
+    public List<String> guestList = new ArrayList<String>();
+    @JsonProperty("host")
+    public String host;
+    @JsonProperty("gameMode")
+    public gameModes gameMode;
 
     public int GetId() {
-        return _id;
+        return this.id;
     }
 
     public void SetId(int id) {
-        _id = id;
+        this.id = id;
     }
 
     public gameModes GetGameMode() {
-        return _gameMode;
+        return this.gameMode;
     }
 
     public void SetGameMode(gameModes gameMode) {
-        _gameMode = gameMode;
+        this.gameMode = gameMode;
     }
 
     public String GetHost() {
-        return _host;
+        return this.host;
     }
 
     public void SetHost(String host) {
-        _host = host;
+        this.host = host;
     }
 
     public List<String> GetGuestList() {
-        return _guestList;
+        return this.guestList;
     }
 
     public void AddToGuestList(String guest) {
-        _guestList.add(guest);
+        this.guestList.add(guest);
     }
 
     @Override
     public String ToINSERT() {
-        return "INSERT INTO rooms (host, guests, gamemode) VALUES ('" + _host + "', ARRAY ["
-                + String.join(", ", _guestList) + "], " + _gameMode + ");";
+        return "INSERT INTO rooms (host, guests, gamemode) VALUES ('" + this.host + "', ARRAY ["
+                + String.join(", ", this.guestList) + "], " + this.gameMode + ");";
     }
 
     @Override
@@ -84,40 +83,16 @@ public class Room implements IDatabaseItem, ISerializable {
 
     @Override
     public <T> String ToUPDATE(T key) {
-        return "UPDATE rooms SET host='" + _host + "', ARRAY ["
-                + String.join(", ", _guestList) + "], gamemode='" + _gameMode + "' WHERE id = " + key;
+        return "UPDATE rooms SET host='" + this.host + "', ARRAY ["
+                + String.join(", ", this.guestList) + "], gamemode='" + this.gameMode + "' WHERE id = " + key;
     }
 
     @Override
     public IDatabaseItem load(ResultSet rs, int rowNum) throws Exception {
-        _id = rs.getInt(1);
-        _host = rs.getString(2);
-        _guestList = Arrays.asList((String[]) rs.getArray(3).getArray());
-        _gameMode = gameModes.values()[rs.getInt(4)];
-        return this;
-    }
-
-    @Override
-    public String toJSON() {
-        JSONObject jsonObject = new JSONObject();
-        Map<String, Object> roomMap = new HashMap<String, Object>();
-        roomMap.put("id", _id);
-        roomMap.put("host", _host);
-        roomMap.put("guestList", _guestList);
-        roomMap.put("gameMode", _gameMode);
-        jsonObject.put("room", roomMap);
-        return jsonObject.toString();
-    }
-
-    @Override
-    public Room fromJSON(String JSON) throws JSONException, AddressNotValidException{
-        JSONObject object = new JSONObject(JSON);
-        _id = object.getInt("id");
-        _host = object.getString("host");
-        for(Object a:object.getJSONArray("guestList").toList()){
-            _guestList.add(String.valueOf(a));
-        }
-        _gameMode = gameModes.values()[object.getInt("gameMode")];
+        this.id = rs.getInt(1);
+        this.host = rs.getString(2);
+        this.guestList = Arrays.asList((String[]) rs.getArray(3).getArray());
+        this.gameMode = gameModes.values()[rs.getInt(4)];
         return this;
     }
 

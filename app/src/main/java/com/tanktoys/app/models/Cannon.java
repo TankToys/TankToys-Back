@@ -1,45 +1,52 @@
 package com.tanktoys.app.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Cannon {
-    public int _id;
-    public int _reloadSpeed;
-    public int _amo;
-    public String _name;
-    public String _bulletType;
+    @JsonProperty("id")
+    public int id;
+    @JsonProperty("reloadSpeed")
+    public int reloadSpeed;
+    @JsonProperty("ammo")
+    public int ammo;
+    @JsonProperty("name")
+    public String name;
+    @JsonProperty("bulletType")
+    public String bulletType;
 
     public Cannon(int id, int reloadSpeed, int amo, String name, String bulletType) {
         SetCannon(id, reloadSpeed, amo, name, bulletType);
     }
 
     public void SetCannon(int id, int reloadSpeed, int amo, String name, String bulletType) {
-        _id = id;
-        _reloadSpeed = reloadSpeed;
-        _amo = amo;
-        _name = name;
-        _bulletType = bulletType;
+        this.id = id;
+        this.reloadSpeed = reloadSpeed;
+        this.ammo = amo;
+        this.name = name;
+        this.bulletType = bulletType;
     }
 
     public int GetId() {
-        return _id;
+        return this.id;
     }
 
     public void SetId(int id) {
-        _id = id;
+        this.id = id;
     }
 
     public int GetSpeed() {
-        return _reloadSpeed;
+        return this.reloadSpeed;
     }
 
     public int GetAmo() {
-        return _amo;
+        return this.ammo;
     }
 
     public String GetName() {
-        return _name;
+        return this.name;
     }
 
     public String GetBulletType() {
-        return _bulletType;
+        return this.bulletType;
     }
 }

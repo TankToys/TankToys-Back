@@ -1,18 +1,20 @@
 package com.tanktoys.app.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.tanktoys.app.utils.PositionValidator;
 import com.tanktoys.app.utils.customExceptions.PositionNotValidException;
 
 public class ArrayMap {
-    public String[] _positions;
+    @JsonProperty("positions")
+    public String[] positions;
 
     public ArrayMap(String[] positions) throws PositionNotValidException {
         SetPositions(positions);
     }
 
     public String[] GetPositions() {
-        if (_positions != null) {
-            return _positions;
+        if (this.positions != null) {
+            return this.positions;
         } else {
             return null;
         }
@@ -20,7 +22,7 @@ public class ArrayMap {
 
     public void SetPositions(String[] positions) throws PositionNotValidException {
         if (PositionValidator.validate(positions)) {
-            _positions = positions;
+            this.positions = positions;
         } else {
             throw new PositionNotValidException();
         }

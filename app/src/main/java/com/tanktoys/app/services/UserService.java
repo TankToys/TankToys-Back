@@ -21,10 +21,6 @@ public class UserService {
         return null;
     }
     
-    public User JSONToUser(String userString) throws JSONException, AddressNotValidException{
-        return new User().fromJSON(userString);
-    }
-
     public User getUserByAddress(String address) throws AddressNotValidException{
         User user = new User();
         db.SelectByKey(user, address);

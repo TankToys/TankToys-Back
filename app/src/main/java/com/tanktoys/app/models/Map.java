@@ -4,81 +4,73 @@ import java.sql.ResultSet;
 
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.tanktoys.app.interfaces.IDatabaseItem;
-import com.tanktoys.app.interfaces.ISerializable;
 import com.tanktoys.app.utils.customExceptions.AddressNotValidException;
 import com.tanktoys.app.utils.customExceptions.PositionNotValidException;
 
 import jakarta.validation.constraints.NotNull;
 
 @Component
-public class Map implements IDatabaseItem, ISerializable{
+public class Map implements IDatabaseItem{
     
     @NotNull(message = "Id cannot be null")
-    public int _id;
+    @JsonProperty("id")
+    public int id;
 
     @NotNull(message = "ArrMap cannot be null")
-    public ArrayMap _arrMap;
+    @JsonProperty("arrMap")
+    public ArrayMap arrMap;
 
     @NotNull(message = "Creator cannot be null")
-    public Address _creator;
+    @JsonProperty("creator")
+    public Address creator;
 
     @NotNull(message = "Name cannot be null")
-    public String _name;
+    @JsonProperty("name")
+    public String name;
     
     public Map(){
-        _id = 0;
-        _arrMap = null;
-        _creator = null;
-        _name = null;
+        this.id = 0;
+        this.arrMap = null;
+        this.creator = null;
+        this.name = null;
     }
 
     public Map(int id, String[] positions, String creator, String name) throws PositionNotValidException, AddressNotValidException {
-        _id = id;
-        _arrMap = new ArrayMap(positions);
-        _creator = new Address(creator);
-        _name = name;
+        this.id = id;
+        this.arrMap = new ArrayMap(positions);
+        this.creator = new Address(creator);
+        this.name = name;
     }
 
     public int GetId() {
-        return _id;
+        return this.id;
     }
 
     public ArrayMap GetArrMap(){
-        return _arrMap;
+        return this.arrMap;
     }
 
     public void SetArrMap(String[] positions) throws PositionNotValidException{
-        _arrMap = new ArrayMap(positions);
+        this.arrMap = new ArrayMap(positions);
     }
 
     public Address GetCreator(){
-        return _creator;
+        return this.creator;
     }
 
     public String GetName() {
-        return _name;
+        return this.name;
     }
 
     public void SetName(String name) {
-        _name = name;
-    }
-
-    @Override
-    public String toJSON() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'toJSON'");
-    }
-
-    @Override
-    public ISerializable fromJSON(String JSON) throws Exception {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'fromJSON'");
+        this.name = name;
     }
 
     @Override
     public String ToINSERT() {
-        return "INSERT INTO maps(id, arrmap, creator, name) VALUES('"+_id+"','"+_arrMap.GetPositions()+"','"+_creator.GetAddress()+"','"+_name+"')";
+        return "INSERT INTO maps(id, arrmap, creator, name) VALUES('"+this.id+"','"+this.arrMap.GetPositions()+"','"+this.creator.GetAddress()+"','"+this.name+"')";
     }
 
     @Override
@@ -93,7 +85,7 @@ public class Map implements IDatabaseItem, ISerializable{
 
     @Override
     public <T> String ToUPDATE(T key) {
-        return "UPDATE maps SET id='"+_id+"', arrmap='"+_arrMap.GetPositions()+"', creator='"+_creator.GetAddress()+"', name='"+_name+"' WHERE id = '"+key+"';";
+        return "UPDATE maps SET id='"+this.id+"', arrmap='"+this.arrMap.GetPositions()+"', creator='"+this.creator.GetAddress()+"', name='"+this.name+"' WHERE id = '"+key+"';";
     }
 
     @Override
@@ -103,10 +95,10 @@ public class Map implements IDatabaseItem, ISerializable{
 
     @Override
     public IDatabaseItem load(ResultSet rs, int rowNum) throws Exception {
-        _id = rs.getInt(1);
-        _arrMap.SetPositions((String[]) rs.getArray(2).getArray());
-        _creator.SetAddress(rs.getString(3));
-        _name = rs.getString(4);
+        this.id = rs.getInt(1);
+        this.arrMap.SetPositions((String[]) rs.getArray(2).getArray());
+        this.creator.SetAddress(rs.getString(3));
+        this.name = rs.getString(4);
         return this;
     }
 

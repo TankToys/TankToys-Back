@@ -36,9 +36,9 @@ public class userController {
     }),
             @ApiResponse(responseCode = "400", content = @Content) })
     @GetMapping(value = "/{address}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> getUserByAddress(@PathVariable("address") Address address)
+    public ResponseEntity<User> getUserByAddress(@PathVariable("address") Address address)
             throws AddressNotValidException {
-        return new ResponseEntity<String>(user.getUserByAddress(address).toJSON(), HttpStatus.OK);
+        return new ResponseEntity<User>(user.getUserByAddress(address), HttpStatus.OK);
     }
 
     //--------------------------------------------------INSERT USER--------------------------------------------------------

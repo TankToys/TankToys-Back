@@ -1,51 +1,63 @@
 package com.tanktoys.app.models;
 
+import org.springframework.stereotype.Component;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+@Component
 public class TrackWheels {
-    public int _id;
-    public int _speed;
-    public String _terrain;
-    public String _trackOrWheel;
-    public String _tankType;
-    public String _name;
+    
+    @JsonProperty("id")
+    public int id;
+    @JsonProperty("speed")
+    public int speed;
+    @JsonProperty("terrain")
+    public String terrain;
+    @JsonProperty("trackOrWheel")
+    public String trackOrWheel;
+    @JsonProperty("tankType")
+    public String tankType;
+    @JsonProperty("name")
+    public String name;
 
     public TrackWheels(int id, int speed, String terrain, String trackOrWheel, String tankType, String name) {
         SetTrackWheels(id, speed, terrain, trackOrWheel, tankType, name);
     }
 
     public void SetTrackWheels(int id, int speed, String terrain, String trackOrWheel, String tankType, String name) {
-        _id = id;
-        _speed = speed;
-        _terrain = terrain;
-        _trackOrWheel = trackOrWheel;
-        _tankType = tankType;
-        _name = name;
+        this.id = id;
+        this.speed = speed;
+        this.terrain = terrain;
+        this.trackOrWheel = trackOrWheel;
+        this.tankType = tankType;
+        this.name = name;
     }
 
     public int GetId() {
-        return _id;
+        return id;
     }
     
     public void SetId(int id) {
-        _id = id;
+        this.id = id;
     }
 
     public int GetSpeed() {
-        return _speed;
+        return this.speed;
     }
 
     public String GetTerrain() {
-        return _terrain;
+        return this.terrain;
     }
 
     public String GetTrackOrWheel() {
-        return _trackOrWheel;
+        return this.trackOrWheel;
     }
 
     public String GetTankType() {
-        return _tankType;
+        return this.tankType;
     }
 
     public String GetName() {
-        return _name;
+        return this.name;
     }
 }

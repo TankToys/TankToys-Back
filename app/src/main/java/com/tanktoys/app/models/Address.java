@@ -5,15 +5,16 @@ import com.tanktoys.app.utils.AddressValidator;
 import com.tanktoys.app.utils.customExceptions.AddressNotValidException;
 
 public class Address {
-    public String _address;
+    @JsonProperty("address")
+    public String address;
 
-    public Address(@JsonProperty("_address")String address) throws AddressNotValidException {
+    public Address(String address) throws AddressNotValidException {
         SetAddress(address);
     }
 
     public String GetAddress() {
-        if (_address != null) {
-            return _address;
+        if (this.address != null) {
+            return this.address;
         } else {
             return null;
         }
@@ -21,12 +22,12 @@ public class Address {
 
     @Override
     public String toString(){
-        return _address;
+        return this.address;
     }
 
     public void SetAddress(String address) throws AddressNotValidException {
         if (AddressValidator.validate(address)) {
-            _address = address;
+            this.address = address;
         } else {
             throw new AddressNotValidException(address);
         }

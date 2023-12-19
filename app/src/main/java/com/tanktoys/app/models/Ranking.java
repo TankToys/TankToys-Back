@@ -7,46 +7,49 @@ import java.util.Map;
 
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.tanktoys.app.interfaces.IDatabaseItem;
 
 @Component
 public class Ranking implements IDatabaseItem {
-
-    public Address _address;
-    public Map<String, Integer> _modes;
+    
+    @JsonProperty("address")
+    public Address address;
+    @JsonProperty("modes")
+    public Map<String, Integer> modes;
 
     public Ranking(){
         
     }
 
     public Ranking(String address, Map<String, Integer> modes) throws AddressNotValidException {
-        SetRanking(address, _modes);
+        SetRanking(address, this.modes);
     }
 
     public void SetRanking(String address, Map<String, Integer> modes) throws AddressNotValidException {
-        _address = new Address(address);
-        _modes = modes;
+        this.address = new Address(address);
+        this.modes = modes;
     }
 
     public Map<String, Integer> GetModes(){
-        return _modes;
+        return this.modes;
     }
     
     public void Setmodes(Map<String, Integer> modes){
-        _modes = modes;
+        this.modes = modes;
     }
 
     public Address GetUser(){
-        return _address;
+        return this.address;
     }
     
     public void SetUser(Address address){
-        _address = address;
+        this.address = address;
     }
     
     @Override
     public String ToINSERT() {
-        return "INSERT INTO ranking(address, modes) VALUES('"+_address.GetAddress()+"','"+_modes.toString()+"')";
+        return "INSERT INTO ranking(address, modes) VALUES('"+this.address.GetAddress()+"','"+this.modes.toString()+"')";
     }
 
     @Override
@@ -66,13 +69,13 @@ public class Ranking implements IDatabaseItem {
     
     @Override
     public <T> String ToUPDATE(T key) {
-        return "UPDATE ranking SET address='"+_address.GetAddress()+"', modes='"+_modes.toString()+"' WHERE address = '"+key+"';";
+        return "UPDATE ranking SET address='"+this.address.GetAddress()+"', modes='"+this.modes.toString()+"' WHERE address = '"+key+"';";
     }
 
     @Override
     public IDatabaseItem load(ResultSet rs, int rowNum) throws Exception {
-        _address.SetAddress(rs.getString(1));
-        // _modes = rs.getString(2);
+        this.address.SetAddress(rs.getString(1));
+        // this.modes = rs.getString(2);
         return this;
     }
 
