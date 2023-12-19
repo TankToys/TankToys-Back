@@ -20,6 +20,10 @@ public class TrackWheels {
     @JsonProperty("name")
     public String name;
 
+    public TrackWheels() {
+        SetTrackWheels(0, 0, "terrain", "trackOrWheel", "tankType", "name");
+    }
+
     public TrackWheels(int id, int speed, String terrain, String trackOrWheel, String tankType, String name) {
         SetTrackWheels(id, speed, terrain, trackOrWheel, tankType, name);
     }

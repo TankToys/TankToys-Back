@@ -16,6 +16,10 @@ public class Shell {
     @JsonProperty("name")
     public String name;
 
+    public Shell() {
+        SetShell(0, 0, "", "name");
+    }
+
     public Shell(int id, int hp, String type, String name) {
         SetShell(id, hp, type, name);
     }
