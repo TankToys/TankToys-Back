@@ -8,7 +8,7 @@ public class Address {
     @JsonProperty("address")
     public String address;
 
-    public Address(String address) throws AddressNotValidException {
+    public Address(@JsonProperty("address")String address) throws AddressNotValidException {
         SetAddress(address);
     }
 

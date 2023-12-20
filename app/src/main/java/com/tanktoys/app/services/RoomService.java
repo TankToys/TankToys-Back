@@ -17,6 +17,10 @@ public class RoomService {
         return room;
     }
 
+    public boolean insertRoom(Room room){
+        return db.Insert(room);
+    }
+
     public boolean editRoom(Room room) {
         return db.Update(room, room.GetId());
     }

@@ -31,12 +31,13 @@ public class User implements IDatabaseItem{
     public int level;
     
     public User() throws AddressNotValidException{
-        address = new Address("0x0000000000000000000000000000000000000000");
-        level = 0;
+        this.address = new Address("0x0000000000000000000000000000000000000000");
+        this.user = "default";
+        this.level = 0;
     }
 
-    public User(@JsonProperty("address")String address, @JsonProperty("user")String user, @JsonProperty("level")int level) throws AddressNotValidException{
-        this.address = new Address(address);
+    public User(@JsonProperty("address")Address address, @JsonProperty("user")String user, @JsonProperty("level")int level) throws AddressNotValidException{
+        this.address = address;
         this.user = user;
         this.level = level;
     }

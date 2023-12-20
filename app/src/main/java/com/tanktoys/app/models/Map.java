@@ -1,6 +1,7 @@
 package com.tanktoys.app.models;
 
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 import org.springframework.stereotype.Component;
 
@@ -30,11 +31,11 @@ public class Map implements IDatabaseItem{
     @JsonProperty("name")
     public String name;
     
-    public Map(){
+    public Map() throws AddressNotValidException, PositionNotValidException{
         this.id = 0;
-        this.arrMap = null;
-        this.creator = null;
-        this.name = null;
+        this.arrMap = new ArrayMap(new String[]{"Foo","Bar","Baz"});
+        this.creator = new Address("0x0000000000000000000000000000000000000000");
+        this.name = "null";
     }
 
     public Map(@JsonProperty("id")int id, @JsonProperty("positions")String[] positions, @JsonProperty("creator")String creator, @JsonProperty("name")String name) throws PositionNotValidException, AddressNotValidException {
@@ -85,7 +86,7 @@ public class Map implements IDatabaseItem{
 
     @Override
     public <T> String ToUPDATE(T key) {
-        return "UPDATE maps SET id='"+this.id+"', arrmap='"+this.arrMap.GetPositions()+"', creator='"+this.creator.GetAddress()+"', name='"+this.name+"' WHERE id = '"+key+"';";
+        return "UPDATE maps SET arrmap='"+this.arrMap.GetPositions()+"', creator='"+this.creator.GetAddress()+"', name='"+this.name+"' WHERE id = '"+key+"';";
     }
 
     @Override

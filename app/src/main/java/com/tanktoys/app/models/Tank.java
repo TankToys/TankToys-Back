@@ -57,14 +57,14 @@ public class Tank implements IDatabaseItem {
             @JsonProperty("shell") Shell shell,
             @JsonProperty("trackWheels") TrackWheels trackWheels,
             @JsonProperty("name") String name,
-            @JsonProperty("creator") String creator) throws AddressNotValidException {
+            @JsonProperty("creator") Address creator) throws AddressNotValidException {
         this.id = id;
         this.bullet = bullet;
         this.cannon = cannon;
         this.shell = shell;
         this.trackWheels = trackWheels;
         this.name = name;
-        this.creator = new Address(creator);
+        this.creator = creator;
     }
 
     public int GetId() {
@@ -135,7 +135,7 @@ public class Tank implements IDatabaseItem {
 
     @Override
     public <T> String ToUPDATE(T key) {
-        return "UPDATE tank SET id='" + this.id + "', bullet='" + this.bullet.GetId() + "', cannon='"
+        return "UPDATE tank SET bullet='" + this.bullet.GetId() + "', cannon='"
                 + this.cannon.GetId() + "', shell='" + this.shell.GetId() + "', trackwheel='" + this.trackWheels.GetId()
                 + "', name='" + this.name + "', creator='" + this.creator.GetAddress() + "' WHERE id = '" + key + "';";
     }

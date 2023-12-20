@@ -21,10 +21,6 @@ public class ArrayMap {
     }
 
     public void SetPositions(String[] positions) throws PositionNotValidException {
-        if (PositionValidator.validate(positions)) {
-            this.positions = positions;
-        } else {
-            throw new PositionNotValidException();
-        }
+        this.positions = positions;
     }
 }
