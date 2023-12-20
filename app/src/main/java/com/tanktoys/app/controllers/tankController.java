@@ -138,12 +138,12 @@ public class tankController {
 
     //--------------------------------------------------DELETE TANK--------------------------------------------------------
 
-    @Operation(summary = "${tankPath}")
+    @Operation(summary = "${tankPath}/{id}")
     @ApiResponses(value = { @ApiResponse(responseCode = "202",  content = {
             @Content(mediaType = "application/json")
     }),
             @ApiResponse(responseCode = "400",  content = @Content) })
-    @DeleteMapping( produces = MediaType.APPLICATION_JSON_VALUE)
+    @DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity deleteTank(@PathVariable("tankId") int tankId) throws AddressNotValidException{
         if (tank.deleteTank(tankId)) {
             return new ResponseEntity(HttpStatus.ACCEPTED);

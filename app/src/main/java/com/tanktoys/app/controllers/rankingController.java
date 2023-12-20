@@ -102,12 +102,12 @@ public class rankingController {
 
     //--------------------------------------------------DELETE RANKING--------------------------------------------------------
 
-    @Operation(summary = "${rankingPath}")
+    @Operation(summary = "${rankingPath}/{address}")
     @ApiResponses(value = { @ApiResponse(responseCode = "200",  content = {
             @Content(mediaType = "application/json")
     }),
             @ApiResponse(responseCode = "400",  content = @Content) })
-    @DeleteMapping( produces = MediaType.APPLICATION_JSON_VALUE)
+    @DeleteMapping(value = "/{address}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity deleteRanking(@PathVariable("address") Address address) throws AddressNotValidException {
                 if (rankingService.deleteRanking(address)) {
             return new ResponseEntity(HttpStatus.ACCEPTED);
