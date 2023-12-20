@@ -5,12 +5,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.springframework.stereotype.Component;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.tanktoys.app.interfaces.IDatabaseItem;
 
-@Component
+
 public class Room implements IDatabaseItem {
 
     public enum gameModes {
@@ -27,6 +25,13 @@ public class Room implements IDatabaseItem {
     public String host;
     @JsonProperty("gameMode")
     public gameModes gameMode;
+
+    public Room(int id, List<String> guestList, String host, gameModes gameMode){
+        this.id = id;
+        this.guestList = guestList;
+        this.host = host;
+        this.gameMode = gameMode;
+    }
 
     public int GetId() {
         return this.id;

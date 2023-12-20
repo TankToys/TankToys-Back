@@ -24,7 +24,7 @@ public class TrackWheels {
         SetTrackWheels(0, 0, "terrain", "trackOrWheel", "tankType", "name");
     }
 
-    public TrackWheels(int id, int speed, String terrain, String trackOrWheel, String tankType, String name) {
+    public TrackWheels(@JsonProperty("id")int id, @JsonProperty("speed")int speed, @JsonProperty("terrain")String terrain, @JsonProperty("trackOrWheel")String trackOrWheel, @JsonProperty("tankType")String tankType, @JsonProperty("name")String name) {
         SetTrackWheels(id, speed, terrain, trackOrWheel, tankType, name);
     }
 

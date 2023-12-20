@@ -43,10 +43,10 @@ public class Tank implements IDatabaseItem {
 
     public Tank() throws AddressNotValidException {
         this.id = 0;
-        this.bullet = new Bullet(0, 0, 0, 0, "this.name", "this.name");
-        this.cannon = new Cannon(0, 0, 0, "this.name", "this.name");
-        this.shell = new Shell(0, 0, "this.name", "this.name");
-        this.trackWheels = new TrackWheels(0, 0, "this.name", "this.name", "this.name", "this.name");
+        this.bullet = new Bullet(0, 0, 0, 0, "name", "name");
+        this.cannon = new Cannon(0, 0, 0, "name", "name");
+        this.shell = new Shell(0, 0, "name", "name");
+        this.trackWheels = new TrackWheels(0, 0, "name", "name", "name", "name");
         this.name = "name";
         this.creator = new Address("0x0000000000000000000000000000000000000000");
     }

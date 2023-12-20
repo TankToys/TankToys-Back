@@ -22,7 +22,7 @@ public class Ranking implements IDatabaseItem {
         
     }
 
-    public Ranking(String address, Map<String, Integer> modes) throws AddressNotValidException {
+    public Ranking(@JsonProperty("address")String address, @JsonProperty("modes")Map<String, Integer> modes) throws AddressNotValidException {
         SetRanking(address, this.modes);
     }
 

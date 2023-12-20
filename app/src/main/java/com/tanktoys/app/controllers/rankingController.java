@@ -66,7 +66,7 @@ public class rankingController {
     }),
             @ApiResponse(responseCode = "400",  content = @Content) })
     @GetMapping(value = "/{mode}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity getRanksByMode(@PathVariable("mode") String mode) throws AddressNotValidException {
+    public ResponseEntity<Ranking[]> getRanksByMode(@PathVariable("mode") String mode) throws AddressNotValidException {
         return new ResponseEntity<Ranking[]>(rankingService.getRanksByMode(mode), HttpStatus.OK);
     }
 
@@ -78,7 +78,7 @@ public class rankingController {
     }),
             @ApiResponse(responseCode = "400",  content = @Content) })
     @PostMapping( produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity insertRanking(@PathVariable("ranking") Ranking ranking) throws AddressNotValidException {
+    public ResponseEntity insertRanking(@RequestBody Ranking ranking) throws AddressNotValidException {
 		if (rankingService.insertRanking(ranking)) {
             return new ResponseEntity(HttpStatus.ACCEPTED);
         }
@@ -93,7 +93,7 @@ public class rankingController {
     }),
             @ApiResponse(responseCode = "400",  content = @Content) })
     @PutMapping( produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity editRanking(@PathVariable("ranking") Ranking ranking) {
+    public ResponseEntity editRanking(@RequestBody Ranking ranking) {
                 if (rankingService.editRanking(ranking)) {
             return new ResponseEntity(HttpStatus.ACCEPTED);
         }

@@ -17,11 +17,11 @@ public class Bullet {
     @JsonProperty("type")
     public String type;
 
-    public Bullet(int id, int speed, int dmg, int bounces, String name, String type) {
+    public Bullet(@JsonProperty("id")int id, @JsonProperty("speed")int speed, @JsonProperty("dmg")int dmg, @JsonProperty("bounces")int bounces, @JsonProperty("name")String name, @JsonProperty("type")String type) {
         SetBullet(id, speed, dmg, bounces, name, type);
     }
 
-    public void SetBullet(int id, int speed, int dmg, int bounces, String name, String type) {
+    public void SetBullet(@JsonProperty("id")int id, @JsonProperty("speed")int speed, @JsonProperty("dmg")int dmg, @JsonProperty("bounces")int bounces, @JsonProperty("name")String name, @JsonProperty("type")String type) {
         this.id = id;
         this.speed = speed;
         this.dmg = dmg;

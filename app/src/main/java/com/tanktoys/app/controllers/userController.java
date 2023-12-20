@@ -26,7 +26,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 public class userController {
 
     @Autowired
-    UserService user;
+    UserService userService;
 
     //--------------------------------------------------GET USER BY ADDRESS--------------------------------------------------------
 
@@ -36,9 +36,12 @@ public class userController {
     }),
             @ApiResponse(responseCode = "400", content = @Content) })
     @GetMapping(value = "/{address}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<User> getUserByAddress(@PathVariable("address") Address address)
-            throws AddressNotValidException {
-        return new ResponseEntity<User>(user.getUserByAddress(address), HttpStatus.OK);
+    public ResponseEntity<User> getUserByAddress(@PathVariable("address") Address address) throws AddressNotValidException {
+        User user = userService.getUserByAddress(address);
+		if (user.user != null) {
+			return new ResponseEntity<User>(userService.getUserByAddress(address), HttpStatus.OK);
+		}
+		return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
     }
 
     //--------------------------------------------------INSERT USER--------------------------------------------------------
@@ -50,7 +53,7 @@ public class userController {
             @ApiResponse(responseCode = "400", content = @Content) })
     @PostMapping( produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity insertUser(@RequestBody User requestUser) throws JSONException, AddressNotValidException {
-        if (user.insertUser(requestUser)) {
+        if (userService.insertUser(requestUser)) {
             return new ResponseEntity(HttpStatus.CREATED);
         }
         return new ResponseEntity(HttpStatus.BAD_REQUEST);
@@ -65,7 +68,7 @@ public class userController {
             @ApiResponse(responseCode = "400", content = @Content) })
     @PutMapping( produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity editUser(@RequestBody User requestUser) throws JSONException, AddressNotValidException {
-        if (user.editUser(requestUser)) {
+        if (userService.editUser(requestUser)) {
             return new ResponseEntity(HttpStatus.ACCEPTED);
         }
         return new ResponseEntity(HttpStatus.BAD_REQUEST);
@@ -80,7 +83,7 @@ public class userController {
             @ApiResponse(responseCode = "400", content = @Content) })
     @DeleteMapping( produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity deleteUser(@PathVariable("address") Address address) throws AddressNotValidException {
-        if (user.deleteUser(address)) {
+        if (userService.deleteUser(address)) {
             return new ResponseEntity(HttpStatus.ACCEPTED);
         }
         return new ResponseEntity(HttpStatus.BAD_REQUEST);

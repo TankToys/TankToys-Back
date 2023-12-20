@@ -11,9 +11,7 @@ import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.tanktoys.app.models.Address;
 import com.tanktoys.app.models.Tank;
-import com.tanktoys.app.models.User;
 import com.tanktoys.app.services.TankService;
 import com.tanktoys.app.utils.customExceptions.AddressNotValidException;
 

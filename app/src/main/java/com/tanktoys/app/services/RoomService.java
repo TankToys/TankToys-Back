@@ -12,7 +12,7 @@ public class RoomService {
     DatabaseService db;
 
     public Room getRoomById(int id) {
-        Room room = new Room();
+        Room room = new Room(id, null, null, null);
         db.SelectByKey(room, id);
         return room;
     }
@@ -22,7 +22,7 @@ public class RoomService {
     }
 
     public boolean deleteRoom(int id) {
-        Room room = new Room();
+        Room room = new Room(id, null, null, null);
         return db.Delete(room, id);
     }
     

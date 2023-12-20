@@ -14,11 +14,11 @@ public class Cannon {
     @JsonProperty("bulletType")
     public String bulletType;
 
-    public Cannon(int id, int reloadSpeed, int amo, String name, String bulletType) {
+    public Cannon(@JsonProperty("id")int id, @JsonProperty("reloadSpeed")int reloadSpeed, @JsonProperty("amo")int amo, @JsonProperty("name")String name, @JsonProperty("bulletType")String bulletType) {
         SetCannon(id, reloadSpeed, amo, name, bulletType);
     }
 
-    public void SetCannon(int id, int reloadSpeed, int amo, String name, String bulletType) {
+    public void SetCannon(@JsonProperty("id")int id, @JsonProperty("reloadSpeed")int reloadSpeed, @JsonProperty("amo")int amo, @JsonProperty("name")String name, @JsonProperty("bulletType")String bulletType) {
         this.id = id;
         this.reloadSpeed = reloadSpeed;
         this.ammo = amo;

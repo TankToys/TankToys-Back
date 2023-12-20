@@ -37,7 +37,7 @@ public class Map implements IDatabaseItem{
         this.name = null;
     }
 
-    public Map(int id, String[] positions, String creator, String name) throws PositionNotValidException, AddressNotValidException {
+    public Map(@JsonProperty("id")int id, @JsonProperty("positions")String[] positions, @JsonProperty("creator")String creator, @JsonProperty("name")String name) throws PositionNotValidException, AddressNotValidException {
         this.id = id;
         this.arrMap = new ArrayMap(positions);
         this.creator = new Address(creator);

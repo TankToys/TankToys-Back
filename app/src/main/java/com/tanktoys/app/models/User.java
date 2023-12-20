@@ -35,25 +35,25 @@ public class User implements IDatabaseItem{
         level = 0;
     }
 
-    public User(String address, String user, int level) throws AddressNotValidException{
+    public User(@JsonProperty("address")String address, @JsonProperty("user")String user, @JsonProperty("level")int level) throws AddressNotValidException{
         this.address = new Address(address);
         this.user = user;
         this.level = level;
     }
 
     public String Getuser(){
-        return user;
+        return this.user;
     }
     
     public void Setuser(String user){
         this.user = user;
     }
     public Address Getaddress(){
-        return address;
+        return this.address;
     }
     
     public int GetLevel(){
-        return level;
+        return this.level;
     }
     
     public void SetLevel(int level){
@@ -63,7 +63,7 @@ public class User implements IDatabaseItem{
 
     @Override
     public String ToINSERT() {
-        return "INSERT INTO addresses(address, username, level) VALUES('"+address.toString()+"','"+user+"', 0)";
+        return "INSERT INTO addresses(address, username, level) VALUES('"+this.address.toString()+"','"+this.user+"', 0)";
     }
 
     @Override
@@ -78,7 +78,7 @@ public class User implements IDatabaseItem{
 
     @Override
     public <T> String ToUPDATE(T key) {
-        return "UPDATE addresses SET address='"+address.toString()+"', username='"+user+"', level='"+level+"' WHERE address = '"+key+"'";
+        return "UPDATE addresses SET address='"+this.address.toString()+"', username='"+this.user+"', level='"+this.level+"' WHERE address = '"+key+"'";
     }
 
     @Override
@@ -88,8 +88,9 @@ public class User implements IDatabaseItem{
 
     @Override
     public User load(ResultSet rs, int rowNum) throws AddressNotValidException, SQLException {
-        address.SetAddress(rs.getString(1));
-        user = rs.getString(2);   
+        this.address.SetAddress(rs.getString(1));
+        this.user = rs.getString(2);   
+        this.level = rs.getInt(3);
         return this;
     }
 }

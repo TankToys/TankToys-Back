@@ -8,7 +8,7 @@ public class ArrayMap {
     @JsonProperty("positions")
     public String[] positions;
 
-    public ArrayMap(String[] positions) throws PositionNotValidException {
+    public ArrayMap(@JsonProperty("positions")String[] positions) throws PositionNotValidException {
         SetPositions(positions);
     }
 

@@ -20,7 +20,7 @@ public class Shell {
         SetShell(0, 0, "", "name");
     }
 
-    public Shell(int id, int hp, String type, String name) {
+    public Shell(@JsonProperty("id")int id, @JsonProperty("hp")int hp, @JsonProperty("type")String type, @JsonProperty("name")String name) {
         SetShell(id, hp, type, name);
     }
 
