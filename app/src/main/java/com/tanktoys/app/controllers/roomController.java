@@ -69,12 +69,12 @@ public class roomController {
 
 	//--------------------------------------------------DELETE ROOM--------------------------------------------------------
 
-	@Operation(summary = "${roomPath}")
+	@Operation(summary = "${roomPath}/{id}")
 	@ApiResponses(value = { @ApiResponse(responseCode = "202", content = {
 			@Content(mediaType = "application/json")
 	}),
 			@ApiResponse(responseCode = "400", content = @Content) })
-	@DeleteMapping( produces = MediaType.APPLICATION_JSON_VALUE)
+	@DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity deleteRoom(@PathVariable("id") int id) {
 		if (roomService.deleteRoom(id)) {
             return new ResponseEntity(HttpStatus.ACCEPTED);

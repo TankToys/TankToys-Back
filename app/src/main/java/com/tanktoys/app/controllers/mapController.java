@@ -76,12 +76,12 @@ public class mapController {
 
     //--------------------------------------------------DELETE MAP--------------------------------------------------------
 
-    @Operation(summary = "${mapPath}")
+    @Operation(summary = "${mapPath}/{id}")
     @ApiResponses(value = { @ApiResponse(responseCode = "200",  content = {
             @Content(mediaType = "application/json", schema = @Schema(implementation = String.class))
     }),
             @ApiResponse(responseCode = "400",  content = @Content) })
-    @DeleteMapping( produces = MediaType.APPLICATION_JSON_VALUE)
+    @DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity deleteMap(){
         return null;
     }
