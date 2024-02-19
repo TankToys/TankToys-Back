@@ -11,7 +11,7 @@ public class RoomService {
     @Autowired
     DatabaseService db;
 
-    public Room getRoomById(int id) {
+    public Room getRoomById(String id) {
         Room room = new Room(id, null, null, null);
         db.SelectByKey(room, id);
         return room;
@@ -25,7 +25,7 @@ public class RoomService {
         return db.Update(room, room.GetId());
     }
 
-    public boolean deleteRoom(int id) {
+    public boolean deleteRoom(String id) {
         Room room = new Room(id, null, null, null);
         return db.Delete(room, id);
     }

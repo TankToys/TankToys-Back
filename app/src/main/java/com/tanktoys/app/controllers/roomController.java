@@ -33,7 +33,7 @@ public class roomController {
 	}),
 			@ApiResponse(responseCode = "400", content = @Content) })
 	@GetMapping( produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Room> getRoom(@PathVariable("id") int id) {
+	public ResponseEntity<Room> getRoom(@PathVariable("id") String id) {
 		return new ResponseEntity<Room>(roomService.getRoomById(id), HttpStatus.OK);
 	}
 
@@ -75,7 +75,7 @@ public class roomController {
 	}),
 			@ApiResponse(responseCode = "400", content = @Content) })
 	@DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity deleteRoom(@PathVariable("id") int id) {
+	public ResponseEntity deleteRoom(@PathVariable("id") String id) {
 		if (roomService.deleteRoom(id)) {
             return new ResponseEntity(HttpStatus.ACCEPTED);
         }

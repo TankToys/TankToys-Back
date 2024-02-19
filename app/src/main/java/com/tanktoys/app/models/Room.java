@@ -12,13 +12,13 @@ import com.tanktoys.app.interfaces.IDatabaseItem;
 public class Room implements IDatabaseItem {
 
     public enum gameModes {
-        GAMEMODE1,
-        GAMEMODE2,
+        _1V1,
+        _PVP,
         GAMEMODE3
     }
 
     @JsonProperty("id")
-    public int id;
+    public String id;
     @JsonProperty("guestList")
     public List<String> guestList = new ArrayList<String>();
     @JsonProperty("host")
@@ -26,18 +26,18 @@ public class Room implements IDatabaseItem {
     @JsonProperty("gameMode")
     public gameModes gameMode;
 
-    public Room(int id, List<String> guestList, String host, gameModes gameMode){
+    public Room(String id, List<String> guestList, String host, gameModes gameMode){
         this.id = id;
         this.guestList = guestList;
         this.host = host;
         this.gameMode = gameMode;
     }
 
-    public int GetId() {
+    public String GetId() {
         return this.id;
     }
 
-    public void SetId(int id) {
+    public void SetId(String id) {
         this.id = id;
     }
 
@@ -67,8 +67,8 @@ public class Room implements IDatabaseItem {
 
     @Override
     public String ToINSERT() {
-        return "INSERT INTO rooms (host, guests, gamemode) VALUES ('" + this.host + "', ARRAY ["
-                + String.join(", ", this.guestList) + "], " + this.gameMode + ");";
+        return "INSERT INTO rooms (id, host, guests, gamemode) VALUES ('" + this.id + "', '" + this.host + "' ARRAY ["
+                + String.join(", ", this.guestList) + "], " + this.gameMode.ordinal() + ");";
     }
 
     @Override
@@ -94,7 +94,7 @@ public class Room implements IDatabaseItem {
 
     @Override
     public IDatabaseItem load(ResultSet rs, int rowNum) throws Exception {
-        this.id = rs.getInt(1);
+        this.id = rs.getString(1);
         this.host = rs.getString(2);
         this.guestList = Arrays.asList((String[]) rs.getArray(3).getArray());
         this.gameMode = gameModes.values()[rs.getInt(4)];
