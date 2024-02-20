@@ -67,13 +67,13 @@ public class Room implements IDatabaseItem {
 
     @Override
     public String ToINSERT() {
-        return "INSERT INTO rooms (id, host, guests, gamemode) VALUES ('" + this.id + "', '" + this.host + "' ARRAY ["
-                + String.join(", ", this.guestList) + "], " + this.gameMode.ordinal() + ");";
+        return "INSERT INTO rooms (id, host, guests, gamemode) VALUES ('" + this.id + "', '" + this.host + "', ARRAY ['"
+                + String.join("', '", this.guestList) + "'], " + this.gameMode.ordinal() + ");";
     }
 
     @Override
     public <T> String ToSELECT(T key) {
-        return "SELECT * FROM rooms WHERE id = '"+key+"'";
+        return "SELECT * FROM rooms WHERE id LIKE '"+key+"'";
     }
 
     @Override
@@ -83,22 +83,25 @@ public class Room implements IDatabaseItem {
 
     @Override
     public <T> String ToDELETE(T key) {
-        return "DELETE FROM rooms WHERE id = " + key;
+        return "DELETE FROM rooms WHERE id =LIKE " + key;
     }
 
     @Override
     public <T> String ToUPDATE(T key) {
-        return "UPDATE rooms SET host='" + this.host + "', ARRAY ["
-                + String.join(", ", this.guestList) + "], gamemode='" + this.gameMode + "' WHERE id = " + key;
+        return "UPDATE rooms SET host='" + this.host + "', guests = ARRAY ['"
+                + String.join("', '", this.guestList) + "'], gamemode=" + this.gameMode.ordinal() + " WHERE id = '" + key + "'";
     }
 
     @Override
     public IDatabaseItem load(ResultSet rs, int rowNum) throws Exception {
         this.id = rs.getString(1);
         this.host = rs.getString(2);
-        this.guestList = Arrays.asList((String[]) rs.getArray(3).getArray());
+        this.guestList = new ArrayList<String>(Arrays.asList((String[]) rs.getArray(3).getArray()));
         this.gameMode = gameModes.values()[rs.getInt(4)];
         return this;
     }
+
+    
+
 
 }

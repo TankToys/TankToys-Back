@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tanktoys.app.models.Address;
+import com.tanktoys.app.models.JoinRoomBody;
 import com.tanktoys.app.models.Ranking;
 import com.tanktoys.app.services.MultiplayerService;
 import com.tanktoys.app.utils.customExceptions.AddressNotValidException;
@@ -28,19 +29,38 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @Tag(name = "${multiplayerPath}")
 @RequestMapping("${multiplayerPath}")
 public class multiplayerController {
+
     @Autowired
     MultiplayerService multiplayerService;
 
-    // --------------------------------------------------GET_TANKING--------------------------------------------------------
+    // --------------------------------------------------CREATE_ROOM--------------------------------------------------------
 
-    @Operation(summary = "${multiplayerPath}/room")
+    @Operation(summary = "${multiplayerPath}/createRoom")
     @ApiResponses(value = { @ApiResponse(responseCode = "200", content = {
-            @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = Ranking.class)))
+            @Content(mediaType = "application/json")
     }),
             @ApiResponse(responseCode = "400", content = @Content) })
-    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/createRoom", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> createRoom(@RequestBody String hostId) throws AddressNotValidException {
         return new ResponseEntity<String>(multiplayerService.CreateRoom(new Address(hostId)), HttpStatus.OK);
     }
 
+    // --------------------------------------------------ADD_TO_ROOM--------------------------------------------------------
+
+    @Operation(summary = "${multiplayerPath}/join")
+    @ApiResponses(value = { @ApiResponse(responseCode = "200", content = {
+            @Content(mediaType = "application/json")
+    }),
+            @ApiResponse(responseCode = "400", content = @Content) })
+    @PostMapping(value = "/joinRoom",produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity addToRoom(@RequestBody JoinRoomBody body) throws AddressNotValidException {
+        if (multiplayerService.AddGuestToRoom(body.roomId, new Address(body.guestId))) {
+            return new ResponseEntity(HttpStatus.ACCEPTED);
+        }
+        return new ResponseEntity(HttpStatus.BAD_REQUEST);
+    }
+
+    //TODO: https://www.baeldung.com/spring-cache-tutorial
+    //TODO: implement cache to store Player objects per active room
+    
 }

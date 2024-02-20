@@ -29,13 +29,21 @@ public class MultiplayerService {
                 guestList,
                 host.toString(),
                 gameModes._1V1);
-        boolean ok = room.insertRoom(thisRoom);
-
-        if (ok) {
+        if (room.insertRoom(thisRoom)) {
             System.out.println(thisRoom.id);
             return thisRoom.id;
         } else {
             return "";
         }
+    }
+
+    public boolean AddGuestToRoom(String roomId, Address guest){
+        Room thisRoom = room.getRoomById(roomId);
+        thisRoom.AddToGuestList(guest.toString());
+
+        if (room.editRoom(thisRoom)) {
+            return true;
+        }
+        return false;
     }
 }
