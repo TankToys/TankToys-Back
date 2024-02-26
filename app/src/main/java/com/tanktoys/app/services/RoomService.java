@@ -25,9 +25,8 @@ public class RoomService {
         return db.Update(room, room.GetId());
     }
 
-    public boolean deleteRoom(String id) {
-        Room room = new Room(id, null, null, null);
-        return db.Delete(room, id);
+    public boolean deleteRoom(Room room) {
+        return db.Delete(room, room.GetId());
     }
     
 }

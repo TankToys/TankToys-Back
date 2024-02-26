@@ -48,7 +48,7 @@ public class Tank implements IDatabaseItem {
         this.shell = new Shell(0, 0, "name", "name");
         this.trackWheels = new TrackWheels(0, 0, "name", "name", "name", "name");
         this.name = "name";
-        this.creator = new Address("0x0000000000000000000000000000000000000000");
+        this.creator = Address.parse("0x0000000000000000000000000000000000000000");
     }
 
     public Tank(@JsonProperty("id") int id,

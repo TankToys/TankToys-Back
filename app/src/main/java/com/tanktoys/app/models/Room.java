@@ -83,7 +83,7 @@ public class Room implements IDatabaseItem {
 
     @Override
     public <T> String ToDELETE(T key) {
-        return "DELETE FROM rooms WHERE id =LIKE " + key;
+        return "DELETE FROM rooms WHERE id LIKE '" + key +"'";
     }
 
     @Override

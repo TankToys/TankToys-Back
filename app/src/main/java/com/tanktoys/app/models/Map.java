@@ -34,14 +34,14 @@ public class Map implements IDatabaseItem{
     public Map() throws AddressNotValidException, PositionNotValidException{
         this.id = 0;
         this.arrMap = new ArrayMap(new String[]{"Foo","Bar","Baz"});
-        this.creator = new Address("0x0000000000000000000000000000000000000000");
+        this.creator = Address.parse("0x0000000000000000000000000000000000000000");
         this.name = "null";
     }
 
     public Map(@JsonProperty("id")int id, @JsonProperty("positions")String[] positions, @JsonProperty("creator")String creator, @JsonProperty("name")String name) throws PositionNotValidException, AddressNotValidException {
         this.id = id;
         this.arrMap = new ArrayMap(positions);
-        this.creator = new Address(creator);
+        this.creator = Address.parse(creator);
         this.name = name;
     }
 

@@ -8,8 +8,16 @@ public class Address {
     @JsonProperty("address")
     public String address;
 
-    public Address(@JsonProperty("address")String address) throws AddressNotValidException {
+    private Address(@JsonProperty("address")String address) throws AddressNotValidException {
         SetAddress(address);
+    }
+
+    public static Address parse(String addresStr){
+        try {
+            return new Address(addresStr);
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     public String GetAddress() {

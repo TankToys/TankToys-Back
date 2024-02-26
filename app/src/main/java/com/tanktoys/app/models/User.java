@@ -27,7 +27,7 @@ public class User implements IDatabaseItem{
     public int level;
     
     public User() throws AddressNotValidException{
-        this.address = new Address("0x0000000000000000000000000000000000000000");
+        this.address = Address.parse("0x0000000000000000000000000000000000000000");
         this.user = "default";
         this.level = 0;
     }
