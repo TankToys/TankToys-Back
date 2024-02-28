@@ -1,7 +1,6 @@
 package com.tanktoys.app.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.tanktoys.app.utils.PositionValidator;
 import com.tanktoys.app.utils.customExceptions.PositionNotValidException;
 
 public class ArrayMap {

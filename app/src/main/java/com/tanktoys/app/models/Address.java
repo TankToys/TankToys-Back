@@ -1,5 +1,6 @@
 package com.tanktoys.app.models;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.tanktoys.app.utils.AddressValidator;
 import com.tanktoys.app.utils.customExceptions.AddressNotValidException;
@@ -8,6 +9,7 @@ public class Address {
     @JsonProperty("address")
     public String address;
 
+    @JsonCreator
     private Address(@JsonProperty("address")String address) throws AddressNotValidException {
         SetAddress(address);
     }

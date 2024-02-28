@@ -31,15 +31,16 @@ public class userController {
     //--------------------------------------------------GET USER BY ADDRESS--------------------------------------------------------
 
     @Operation(summary = "${userPath}/{address}")
+    @CrossOrigin(origins = "http://localhost:4200")
     @ApiResponses(value = { @ApiResponse(responseCode = "200", content = {
             @Content(mediaType = "application/json", schema = @Schema(implementation = User.class))
     }),
             @ApiResponse(responseCode = "400", content = @Content) })
     @GetMapping(value = "/{address}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<User> getUserByAddress(@PathVariable("address") Address address) throws AddressNotValidException {
+    public ResponseEntity<User> getUserByAddress(@PathVariable("address") String address) throws AddressNotValidException {
         User user = userService.getUserByAddress(address);
 		if (user.user != null) {
-			return new ResponseEntity<User>(userService.getUserByAddress(address), HttpStatus.OK);
+			return new ResponseEntity<User>(user, HttpStatus.OK);
 		}
 		return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
     }
@@ -47,6 +48,7 @@ public class userController {
     //--------------------------------------------------INSERT USER--------------------------------------------------------
 
     @Operation(summary = "${userPath}")
+    @CrossOrigin(origins = "http://localhost:4200")
     @ApiResponses(value = { @ApiResponse(responseCode = "201", content = {
             @Content(mediaType = "application/json")
     }),

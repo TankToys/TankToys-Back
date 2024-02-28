@@ -24,12 +24,18 @@ public class UserService {
     public User getUserByAddress(String address) throws AddressNotValidException{
         User user = new User();
         db.SelectByKey(user, address);
+        if (user.user == "default") {
+            user.user = null;
+        }
         return user;
     }
 
     public User getUserByAddress(Address address) throws AddressNotValidException{
         User user = new User();
         db.SelectByKey(user, address.toString());
+        if (user.user == "default") {
+            user.user = null;
+        }
         return user;
     }
 
