@@ -5,6 +5,7 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,6 +34,7 @@ public class multiplayerController {
     // --------------------------------------------------CREATE_ROOM--------------------------------------------------------
 
     @Operation(summary = "${multiplayerPath}/createRoom")
+    @CrossOrigin(origins = "${CORS_sources}")
     @ApiResponses(value = { @ApiResponse(responseCode = "200", content = {
             @Content(mediaType = "application/json")
     }),
@@ -45,6 +47,7 @@ public class multiplayerController {
     // --------------------------------------------------ADD_TO_ROOM--------------------------------------------------------
 
     @Operation(summary = "${multiplayerPath}/joinRoom")
+    @CrossOrigin(origins = "${CORS_sources}")
     @ApiResponses(value = { @ApiResponse(responseCode = "200", content = {
             @Content(mediaType = "application/json")
     }),
@@ -58,6 +61,7 @@ public class multiplayerController {
     }
 
     @Operation(summary = "${multiplayerPath}/closeRoom")
+    @CrossOrigin(origins = "${CORS_sources}")
     @ApiResponses(value = { @ApiResponse(responseCode = "200", content = {
             @Content(mediaType = "application/json")
     }),

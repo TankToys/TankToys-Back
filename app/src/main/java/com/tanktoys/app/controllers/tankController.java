@@ -35,6 +35,7 @@ public class tankController {
     //--------------------------------------------------GET TANK BY ID--------------------------------------------------------
 
     @Operation(summary = "${tankPath}/{id}")
+    @CrossOrigin(origins = "${CORS_sources}")
     @ApiResponses(value = { @ApiResponse(responseCode = "200",  content = {
             @Content(mediaType = "application/json", schema = @Schema(implementation = Tank.class))
     }),
@@ -49,6 +50,7 @@ public class tankController {
     //--------------------------------------------------GET TANKS BY CREATOR ADDRESS--------------------------------------------------------
 
     @Operation(summary = "${tankPath}/creator/{address}")
+    @CrossOrigin(origins = "${CORS_sources}")
     @ApiResponses(value = { @ApiResponse(responseCode = "200",  content = {
             @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = Tank.class)))
     }),
@@ -61,6 +63,7 @@ public class tankController {
     //--------------------------------------------------GET TANKS BY BULLET--------------------------------------------------------
 
     @Operation(summary = "${tankPath}/bullet/{name}")
+    @CrossOrigin(origins = "${CORS_sources}")
     @ApiResponses(value = { @ApiResponse(responseCode = "200",  content = {
             @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = Tank.class)))
     }),
@@ -73,6 +76,7 @@ public class tankController {
     //--------------------------------------------------GET TANKS BY CANNON--------------------------------------------------------
 
     @Operation(summary = "${tankPath}/cannon/{name}")
+    @CrossOrigin(origins = "${CORS_sources}")
     @ApiResponses(value = { @ApiResponse(responseCode = "200",  content = {
             @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = Tank.class)))
     }),
@@ -85,6 +89,7 @@ public class tankController {
     //--------------------------------------------------GET TANKS BY SHELL--------------------------------------------------------
 
     @Operation(summary = "${tankPath}/shell/{name}")
+    @CrossOrigin(origins = "${CORS_sources}")
     @ApiResponses(value = { @ApiResponse(responseCode = "200",  content = {
             @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = Tank.class)))
     }),
@@ -97,6 +102,7 @@ public class tankController {
     //--------------------------------------------------GET TANKS BY TRACKWHEEL--------------------------------------------------------
 
     @Operation(summary = "${tankPath}/trackWheel/{name}")
+    @CrossOrigin(origins = "${CORS_sources}")
     @ApiResponses(value = { @ApiResponse(responseCode = "200",  content = {
             @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = Tank.class)))
     }),
@@ -109,6 +115,7 @@ public class tankController {
     //--------------------------------------------------INSET TANK--------------------------------------------------------
 
     @Operation(summary = "${tankPath}")
+    @CrossOrigin(origins = "${CORS_sources}")
     @ApiResponses(value = { @ApiResponse(responseCode = "201",  content = {
             @Content(mediaType = "application/json")
     }),
@@ -124,6 +131,7 @@ public class tankController {
     //--------------------------------------------------EDIT TANK--------------------------------------------------------
 
     @Operation(summary = "${tankPath}")
+    @CrossOrigin(origins = "${CORS_sources}")
     @ApiResponses(value = { @ApiResponse(responseCode = "202",  content = {
             @Content(mediaType = "application/json")
     }),
@@ -139,6 +147,7 @@ public class tankController {
     //--------------------------------------------------DELETE TANK--------------------------------------------------------
 
     @Operation(summary = "${tankPath}/{id}")
+    @CrossOrigin(origins = "${CORS_sources}")
     @ApiResponses(value = { @ApiResponse(responseCode = "202",  content = {
             @Content(mediaType = "application/json")
     }),

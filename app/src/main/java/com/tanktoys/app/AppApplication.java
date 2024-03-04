@@ -18,10 +18,14 @@ public class AppApplication {
 		return new WebMvcConfigurer() {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
-				registry.addMapping("/api/v1/user")
-				.allowedOrigins("http://localhost:4200");
-				registry.addMapping("/api/v1/user/")
-				.allowedOrigins("http://localhost:4200");
+				registry.addMapping("${userPath}")
+					.allowedOrigins("${CORS_sources}");
+				registry.addMapping("${rankingPath}")
+					.allowedOrigins("${CORS_sources}");
+				registry.addMapping("${tankPath}")
+					.allowedOrigins("${CORS_sources}");
+				registry.addMapping("${mapPath}")
+					.allowedOrigins("${CORS_sources}");
 			}
 		};
 	}
