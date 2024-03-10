@@ -27,7 +27,7 @@ public class Ranking implements IDatabaseItem {
     }
 
     public void SetRanking(String address, Map<String, Integer> modes) throws AddressNotValidException {
-        this.address = new Address(address);
+        this.address = Address.parse(address);
         this.modes = modes;
     }
 

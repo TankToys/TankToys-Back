@@ -2,11 +2,7 @@ package com.tanktoys.app.models;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.Map;
 
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -20,7 +16,7 @@ public class User implements IDatabaseItem{
 
     @NotNull(message = "address cannot be null")
     @JsonProperty("address")
-    public Address address;
+    public String address;
     
     @NotNull(message = "username cannot be null")
     @JsonProperty("user")
@@ -29,17 +25,21 @@ public class User implements IDatabaseItem{
     @NotNull(message = "level cannot be null")
     @JsonProperty("level")
     public int level;
+
+    @JsonProperty("profileImage")
+    public String profileImage;
     
     public User() throws AddressNotValidException{
-        this.address = new Address("0x0000000000000000000000000000000000000000");
+        this.address = "0x0000000000000000000000000000000000000000";
         this.user = "default";
         this.level = 0;
     }
 
-    public User(@JsonProperty("address")Address address, @JsonProperty("user")String user, @JsonProperty("level")int level) throws AddressNotValidException{
-        this.address = address;
+    public User(@JsonProperty("address")Address address, @JsonProperty("user")String user, @JsonProperty("level")int level, @JsonProperty("profileImage") String profileImage) throws AddressNotValidException{
+        this.address = address.toString();
         this.user = user;
         this.level = level;
+        this.profileImage = profileImage;
     }
 
     public String Getuser(){
@@ -49,7 +49,7 @@ public class User implements IDatabaseItem{
     public void Setuser(String user){
         this.user = user;
     }
-    public Address Getaddress(){
+    public String Getaddress(){
         return this.address;
     }
     
@@ -89,9 +89,10 @@ public class User implements IDatabaseItem{
 
     @Override
     public User load(ResultSet rs, int rowNum) throws AddressNotValidException, SQLException {
-        this.address.SetAddress(rs.getString(1));
+        this.address = Address.parse(rs.getString(1)).toString();
         this.user = rs.getString(2);   
         this.level = rs.getInt(3);
+        this.profileImage = rs.getString(4);
         return this;
     }
 }

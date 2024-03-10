@@ -19,9 +19,9 @@
 	<dependencies>
 
 		<dependency>
-			<groupId>io.basc.framework</groupId>
-			<artifactId>swagger</artifactId>
-			<version>1.8.3</version>
+			<groupId>com.auth0</groupId>
+			<artifactId>java-jwt</artifactId>
+			<version>4.4.0</version>
 		</dependency>
 
 
