@@ -22,7 +22,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @EnableAutoConfiguration
 @Tag(name = "${mapPath}")
 @RequestMapping("${mapPath}")
-public class mapController {
+public class MapController {
 
     @Autowired
     MapService mapService;

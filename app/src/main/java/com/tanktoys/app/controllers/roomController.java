@@ -20,7 +20,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @EnableAutoConfiguration
 @Tag(name = "${roomPath}")
 @RequestMapping("${roomPath}")
-public class roomController {
+public class RoomController {
 
 	@Autowired
 	RoomService roomService;

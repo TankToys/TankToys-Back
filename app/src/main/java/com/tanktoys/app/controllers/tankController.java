@@ -27,7 +27,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @EnableAutoConfiguration
 @Tag(name = "${tankPath}")
 @RequestMapping("${tankPath}")
-public class tankController {
+public class TankController {
 
     @Autowired
     TankService tank;

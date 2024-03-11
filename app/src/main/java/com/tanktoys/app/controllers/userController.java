@@ -23,7 +23,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @EnableAutoConfiguration
 @Tag(name = "${userPath}")
 @RequestMapping("${userPath}")
-public class userController {
+public class UserController {
 
     @Autowired
     UserService userService;
