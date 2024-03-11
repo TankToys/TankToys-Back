@@ -1,19 +1,21 @@
 package com.tanktoys.app.controllers;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.SpringBootTestContextBootstrapper;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.BootstrapWith;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-@RunWith(SpringRunner.class)
+import com.tanktoys.app.AppApplication;
+
 @SpringBootTest
-@AutoConfigureMockMvc
+@BootstrapWith(SpringBootTestContextBootstrapper.class)
 public class MapControllerTest {
     
     private String apiPath = "/api/v1/map";
