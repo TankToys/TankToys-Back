@@ -1,20 +1,15 @@
 package com.tanktoys.app.controllers;
 
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.tanktoys.app.models.Address;
 import com.tanktoys.app.models.Ranking;
-import com.tanktoys.app.models.Tank;
 import com.tanktoys.app.services.RankingService;
-import com.tanktoys.app.services.RoomService;
 import com.tanktoys.app.utils.customExceptions.AddressNotValidException;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -29,7 +24,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @EnableAutoConfiguration
 @Tag(name = "${rankingPath}")
 @RequestMapping("${rankingPath}")
-public class rankingController {
+public class RankingController {
 
 	@Autowired
 	RankingService rankingService;
@@ -82,11 +77,11 @@ public class rankingController {
     }),
             @ApiResponse(responseCode = "400",  content = @Content) })
     @PostMapping( produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity insertRanking(@RequestBody Ranking ranking) throws AddressNotValidException {
+    public ResponseEntity<HttpStatus> insertRanking(@RequestBody Ranking ranking) throws AddressNotValidException {
 		if (rankingService.insertRanking(ranking)) {
-            return new ResponseEntity(HttpStatus.ACCEPTED);
+            return new ResponseEntity<HttpStatus>(HttpStatus.ACCEPTED);
         }
-        return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<HttpStatus>(HttpStatus.BAD_REQUEST);
     }
 
     //--------------------------------------------------EDIT RANKING--------------------------------------------------------
@@ -98,11 +93,11 @@ public class rankingController {
     }),
             @ApiResponse(responseCode = "400",  content = @Content) })
     @PutMapping( produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity editRanking(@RequestBody Ranking ranking) {
+    public ResponseEntity<HttpStatus> editRanking(@RequestBody Ranking ranking) {
                 if (rankingService.editRanking(ranking)) {
-            return new ResponseEntity(HttpStatus.ACCEPTED);
+            return new ResponseEntity<HttpStatus>(HttpStatus.ACCEPTED);
         }
-        return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<HttpStatus>(HttpStatus.BAD_REQUEST);
     }
 
     //--------------------------------------------------DELETE RANKING--------------------------------------------------------
@@ -114,10 +109,10 @@ public class rankingController {
     }),
             @ApiResponse(responseCode = "400",  content = @Content) })
     @DeleteMapping(value = "/{address}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity deleteRanking(@PathVariable("address") Address address) throws AddressNotValidException {
+    public ResponseEntity<HttpStatus> deleteRanking(@PathVariable("address") Address address) throws AddressNotValidException {
                 if (rankingService.deleteRanking(address)) {
-            return new ResponseEntity(HttpStatus.ACCEPTED);
+            return new ResponseEntity<HttpStatus>(HttpStatus.ACCEPTED);
         }
-        return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<HttpStatus>(HttpStatus.BAD_REQUEST);
     }
 }

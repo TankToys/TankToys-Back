@@ -6,6 +6,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+/**
+ * The above class is a Spring Boot application with a main method to run the
+ * application.
+ */
 @SpringBootApplication
 public class AppApplication {
 

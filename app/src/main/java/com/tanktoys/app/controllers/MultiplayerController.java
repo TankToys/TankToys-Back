@@ -26,7 +26,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @EnableAutoConfiguration
 @Tag(name = "${multiplayerPath}")
 @RequestMapping("${multiplayerPath}")
-public class multiplayerController {
+public class MultiplayerController {
 
     @Autowired
     MultiplayerService multiplayerService;

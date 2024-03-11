@@ -33,7 +33,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @EnableAutoConfiguration
 @Tag(name = "${userPath}")
 @RequestMapping("${userPath}")
-public class userController {
+public class UserController {
 
     @Autowired
     UserService userService;
@@ -91,7 +91,7 @@ public class userController {
         if (userService.editUser(requestUser)) {
             return new ResponseEntity<User>(requestUser, HttpStatus.ACCEPTED);
         }
-        return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<User>(HttpStatus.BAD_REQUEST);
     }
 
     //--------------------------------------------------DELETE USER--------------------------------------------------------
@@ -103,10 +103,10 @@ public class userController {
     }),
             @ApiResponse(responseCode = "400", content = @Content) })
     @DeleteMapping(value = "/{address}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity deleteUser(@PathVariable("address") Address address) throws AddressNotValidException {
+    public ResponseEntity<HttpStatus> deleteUser(@PathVariable("address") Address address) throws AddressNotValidException {
         if (userService.deleteUser(address)) {
-            return new ResponseEntity(HttpStatus.ACCEPTED);
+            return new ResponseEntity<HttpStatus>(HttpStatus.ACCEPTED);
         }
-        return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<HttpStatus>(HttpStatus.BAD_REQUEST);
     }
 }

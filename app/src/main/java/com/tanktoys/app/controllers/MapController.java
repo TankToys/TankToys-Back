@@ -22,7 +22,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @EnableAutoConfiguration
 @Tag(name = "${mapPath}")
 @RequestMapping("${mapPath}")
-public class mapController {
+public class MapController {
 
     @Autowired
     MapService mapService;
@@ -62,11 +62,11 @@ public class mapController {
     }),
             @ApiResponse(responseCode = "400",  content = @Content) })
     @PostMapping( produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity insertMap(@RequestBody Map map){
+    public ResponseEntity<HttpStatus> insertMap(@RequestBody Map map){
         if (mapService.insertMap(map)) {
-            return new ResponseEntity(HttpStatus.ACCEPTED);
+            return new ResponseEntity<HttpStatus>(HttpStatus.ACCEPTED);
         }
-        return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<HttpStatus>(HttpStatus.BAD_REQUEST);
     }
 
     //--------------------------------------------------EDIT MAP--------------------------------------------------------
@@ -78,11 +78,11 @@ public class mapController {
     }),
             @ApiResponse(responseCode = "400",  content = @Content) })
     @PutMapping( produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity editMap(@RequestBody Map map){
+    public ResponseEntity<HttpStatus> editMap(@RequestBody Map map){
         if (mapService.editMap(map)) {
-            return new ResponseEntity(HttpStatus.ACCEPTED);
+            return new ResponseEntity<HttpStatus>(HttpStatus.ACCEPTED);
         }
-        return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<HttpStatus>(HttpStatus.BAD_REQUEST);
     }
 
     //--------------------------------------------------DELETE MAP--------------------------------------------------------
@@ -94,10 +94,10 @@ public class mapController {
     }),
             @ApiResponse(responseCode = "400",  content = @Content) })
     @DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity deleteMap(@PathVariable("id") int id) throws AddressNotValidException, PositionNotValidException{
+    public ResponseEntity<HttpStatus> deleteMap(@PathVariable("id") int id) throws AddressNotValidException, PositionNotValidException{
         if (mapService.deleteMap(id)) {
-            return new ResponseEntity(HttpStatus.ACCEPTED);
+            return new ResponseEntity<HttpStatus>(HttpStatus.ACCEPTED);
         }
-        return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<HttpStatus>(HttpStatus.BAD_REQUEST);
     }
 }

@@ -27,7 +27,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @EnableAutoConfiguration
 @Tag(name = "${tankPath}")
 @RequestMapping("${tankPath}")
-public class tankController {
+public class TankController {
 
     @Autowired
     TankService tank;
@@ -121,11 +121,11 @@ public class tankController {
     }),
             @ApiResponse(responseCode = "400",  content = @Content) })
     @PostMapping( produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity insertTank(@RequestBody Tank requestTank){
+    public ResponseEntity<HttpStatus> insertTank(@RequestBody Tank requestTank){
         if (tank.insertTank(requestTank)) {
-            return new ResponseEntity(HttpStatus.CREATED);
+            return new ResponseEntity<HttpStatus>(HttpStatus.CREATED);
         }
-		return new ResponseEntity(HttpStatus.BAD_REQUEST);
+		return new ResponseEntity<HttpStatus>(HttpStatus.BAD_REQUEST);
     }
 
     //--------------------------------------------------EDIT TANK--------------------------------------------------------
@@ -137,11 +137,11 @@ public class tankController {
     }),
             @ApiResponse(responseCode = "400",  content = @Content) })
     @PutMapping( produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity editTank(@RequestBody Tank requestTank){
+    public ResponseEntity<HttpStatus> editTank(@RequestBody Tank requestTank){
         if (tank.editTank(requestTank)) {
-            return new ResponseEntity(HttpStatus.ACCEPTED);
+            return new ResponseEntity<HttpStatus>(HttpStatus.ACCEPTED);
         }
-		return new ResponseEntity(HttpStatus.BAD_REQUEST);
+		return new ResponseEntity<HttpStatus>(HttpStatus.BAD_REQUEST);
     }
 
     //--------------------------------------------------DELETE TANK--------------------------------------------------------
@@ -153,10 +153,10 @@ public class tankController {
     }),
             @ApiResponse(responseCode = "400",  content = @Content) })
     @DeleteMapping(value = "/{tankId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity deleteTank(@PathVariable("tankId") int tankId) throws AddressNotValidException{
+    public ResponseEntity<HttpStatus> deleteTank(@PathVariable("tankId") int tankId) throws AddressNotValidException{
         if (tank.deleteTank(tankId)) {
-            return new ResponseEntity(HttpStatus.ACCEPTED);
+            return new ResponseEntity<HttpStatus>(HttpStatus.ACCEPTED);
         }
-		return new ResponseEntity(HttpStatus.BAD_REQUEST);
+		return new ResponseEntity<HttpStatus>(HttpStatus.BAD_REQUEST);
     }
 }
