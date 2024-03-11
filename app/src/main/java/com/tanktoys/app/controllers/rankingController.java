@@ -32,6 +32,7 @@ public class RankingController {
     //--------------------------------------------------GET TANKING--------------------------------------------------------
     
     @Operation(summary = "${rankingPath}")
+    @CrossOrigin(origins = "${CORS_sources}")
     @ApiResponses(value = { @ApiResponse(responseCode = "200",  content = {
             @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = Ranking.class)))
     }),
@@ -44,6 +45,7 @@ public class RankingController {
     //--------------------------------------------------GET RANKS BY ADDRESS--------------------------------------------------------
 
     @Operation(summary = "${rankingPath}/{address}")
+    @CrossOrigin(origins = "${CORS_sources}")
     @ApiResponses(value = { @ApiResponse(responseCode = "200",  content = {
             @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = Ranking.class)))
     }),
@@ -56,6 +58,7 @@ public class RankingController {
     //--------------------------------------------------GET RANKS BY MODE--------------------------------------------------------
 
     @Operation(summary = "${rankingPath}/{mode}")
+    @CrossOrigin(origins = "${CORS_sources}")
     @ApiResponses(value = { @ApiResponse(responseCode = "200",  content = {
             @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = Ranking.class)))
     }),
@@ -68,6 +71,7 @@ public class RankingController {
     //--------------------------------------------------INSERT RANKING--------------------------------------------------------
 
     @Operation(summary = "${rankingPath}")
+    @CrossOrigin(origins = "${CORS_sources}")
     @ApiResponses(value = { @ApiResponse(responseCode = "202",  content = {
             @Content(mediaType = "application/json")
     }),
@@ -83,6 +87,7 @@ public class RankingController {
     //--------------------------------------------------EDIT RANKING--------------------------------------------------------
 
     @Operation(summary = "${rankingPath}")
+    @CrossOrigin(origins = "${CORS_sources}")
     @ApiResponses(value = { @ApiResponse(responseCode = "200",  content = {
             @Content(mediaType = "application/json")
     }),
@@ -98,6 +103,7 @@ public class RankingController {
     //--------------------------------------------------DELETE RANKING--------------------------------------------------------
 
     @Operation(summary = "${rankingPath}/{address}")
+    @CrossOrigin(origins = "${CORS_sources}")
     @ApiResponses(value = { @ApiResponse(responseCode = "200",  content = {
             @Content(mediaType = "application/json")
     }),

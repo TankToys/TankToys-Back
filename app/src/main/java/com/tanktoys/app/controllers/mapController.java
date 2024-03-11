@@ -30,6 +30,7 @@ public class MapController {
     //--------------------------------------------------GET MAP BY ID--------------------------------------------------------
 
     @Operation(summary = "${mapPath}/{id}")
+    @CrossOrigin(origins = "${CORS_sources}")
     @ApiResponses(value = { @ApiResponse(responseCode = "200",  content = {
             @Content(mediaType = "application/json", schema = @Schema(implementation = String.class))
     }),
@@ -42,6 +43,7 @@ public class MapController {
     //--------------------------------------------------GET MAPS BY CREATOR ADDRESS--------------------------------------------------------
 
     @Operation(summary = "${mapPath}/creator/{address}")
+    @CrossOrigin(origins = "${CORS_sources}")
     @ApiResponses(value = { @ApiResponse(responseCode = "200",  content = {
             @Content(mediaType = "application/json", schema = @Schema(implementation = String.class))
     }),
@@ -54,6 +56,7 @@ public class MapController {
     //--------------------------------------------------INSERT MAP--------------------------------------------------------
 
     @Operation(summary = "${mapPath}")
+    @CrossOrigin(origins = "${CORS_sources}")
     @ApiResponses(value = { @ApiResponse(responseCode = "200",  content = {
             @Content(mediaType = "application/json", schema = @Schema(implementation = String.class))
     }),
@@ -69,6 +72,7 @@ public class MapController {
     //--------------------------------------------------EDIT MAP--------------------------------------------------------
 
     @Operation(summary = "${mapPath}")
+    @CrossOrigin(origins = "${CORS_sources}")
     @ApiResponses(value = { @ApiResponse(responseCode = "200",  content = {
             @Content(mediaType = "application/json", schema = @Schema(implementation = String.class))
     }),
@@ -84,6 +88,7 @@ public class MapController {
     //--------------------------------------------------DELETE MAP--------------------------------------------------------
 
     @Operation(summary = "${mapPath}/{id}")
+    @CrossOrigin(origins = "${CORS_sources}")
     @ApiResponses(value = { @ApiResponse(responseCode = "200",  content = {
             @Content(mediaType = "application/json", schema = @Schema(implementation = String.class))
     }),
