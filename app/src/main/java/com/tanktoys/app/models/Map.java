@@ -1,7 +1,6 @@
 package com.tanktoys.app.models;
 
 import java.sql.ResultSet;
-import java.util.ArrayList;
 
 import org.springframework.stereotype.Component;
 
