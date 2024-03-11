@@ -52,11 +52,11 @@ public class UserController {
     }),
             @ApiResponse(responseCode = "400", content = @Content) })
     @PostMapping( produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity insertUser(@RequestBody User requestUser) throws JSONException, AddressNotValidException {
+    public ResponseEntity<HttpStatus> insertUser(@RequestBody User requestUser) throws JSONException, AddressNotValidException {
         if (userService.insertUser(requestUser)) {
-            return new ResponseEntity(HttpStatus.CREATED);
+            return new ResponseEntity<HttpStatus>(HttpStatus.CREATED);
         }
-        return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<HttpStatus>(HttpStatus.BAD_REQUEST);
     }
 
     //--------------------------------------------------EDIT USER--------------------------------------------------------
@@ -67,11 +67,11 @@ public class UserController {
     }),
             @ApiResponse(responseCode = "400", content = @Content) })
     @PutMapping( produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity editUser(@RequestBody User requestUser) throws JSONException, AddressNotValidException {
+    public ResponseEntity<HttpStatus> editUser(@RequestBody User requestUser) throws JSONException, AddressNotValidException {
         if (userService.editUser(requestUser)) {
-            return new ResponseEntity(HttpStatus.ACCEPTED);
+            return new ResponseEntity<HttpStatus>(HttpStatus.ACCEPTED);
         }
-        return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<HttpStatus>(HttpStatus.BAD_REQUEST);
     }
 
     //--------------------------------------------------DELETE USER--------------------------------------------------------
@@ -82,10 +82,10 @@ public class UserController {
     }),
             @ApiResponse(responseCode = "400", content = @Content) })
     @DeleteMapping(value = "/{address}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity deleteUser(@PathVariable("address") Address address) throws AddressNotValidException {
+    public ResponseEntity<HttpStatus> deleteUser(@PathVariable("address") Address address) throws AddressNotValidException {
         if (userService.deleteUser(address)) {
-            return new ResponseEntity(HttpStatus.ACCEPTED);
+            return new ResponseEntity<HttpStatus>(HttpStatus.ACCEPTED);
         }
-        return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<HttpStatus>(HttpStatus.BAD_REQUEST);
     }
 }

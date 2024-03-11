@@ -45,11 +45,11 @@ public class RoomController {
 	}),
 			@ApiResponse(responseCode = "400", content = @Content) })
 	@PostMapping( produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity insertRoom(@RequestBody Room requestRoom) {
+	public ResponseEntity<HttpStatus> insertRoom(@RequestBody Room requestRoom) {
 		if (roomService.editRoom(requestRoom)) {
-			return new ResponseEntity(HttpStatus.CREATED);
+			return new ResponseEntity<HttpStatus>(HttpStatus.CREATED);
 		}
-		return new ResponseEntity(HttpStatus.BAD_REQUEST);
+		return new ResponseEntity<HttpStatus>(HttpStatus.BAD_REQUEST);
 	}
 
 	//--------------------------------------------------EDIT ROOM--------------------------------------------------------
@@ -60,11 +60,11 @@ public class RoomController {
 	}),
 			@ApiResponse(responseCode = "400", content = @Content) })
 	@PutMapping( produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity editRoom(@RequestBody Room requestRoom) {
+	public ResponseEntity<HttpStatus> editRoom(@RequestBody Room requestRoom) {
 		if (roomService.editRoom(requestRoom)) {
-			return new ResponseEntity(HttpStatus.ACCEPTED);
+			return new ResponseEntity<HttpStatus>(HttpStatus.ACCEPTED);
 		}
-		return new ResponseEntity(HttpStatus.BAD_REQUEST);
+		return new ResponseEntity<HttpStatus>(HttpStatus.BAD_REQUEST);
 	}
 
 	//--------------------------------------------------DELETE ROOM--------------------------------------------------------
@@ -75,10 +75,10 @@ public class RoomController {
 	}),
 			@ApiResponse(responseCode = "400", content = @Content) })
 	@DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity deleteRoom(@PathVariable("id") int id) {
+	public ResponseEntity<HttpStatus> deleteRoom(@PathVariable("id") int id) {
 		if (roomService.deleteRoom(id)) {
-            return new ResponseEntity(HttpStatus.ACCEPTED);
+            return new ResponseEntity<HttpStatus>(HttpStatus.ACCEPTED);
         }
-        return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<HttpStatus>(HttpStatus.BAD_REQUEST);
 	}
 }
