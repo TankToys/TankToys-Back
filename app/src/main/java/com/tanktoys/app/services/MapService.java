@@ -32,10 +32,6 @@ public class MapService {
         return map;
     }
 
-    public Map[] getMapsByCreatorAddress(String creator) throws AddressNotValidException{
-        return null;
-    }
-
     public boolean insertMap(Map map){
         return db.Insert(map);
     }

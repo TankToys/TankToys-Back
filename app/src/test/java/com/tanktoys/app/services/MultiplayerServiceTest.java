@@ -10,14 +10,19 @@ import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.MethodOrderer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringRunner;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
+import org.junit.runner.RunWith;
 
 import com.tanktoys.app.AppApplication;
 import com.tanktoys.app.models.Address;
 import com.tanktoys.app.models.Room;
 
 @TestMethodOrder(OrderAnnotation.class)
-@SpringBootTest(classes = AppApplication.class)
+@SpringBootTest
+@RunWith(SpringRunner.class)
+@ContextConfiguration
 public class MultiplayerServiceTest {
     @Autowired
     MultiplayerService service;
